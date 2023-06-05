@@ -1,0 +1,58 @@
+const express = require('express');
+const morgan = require('morgan')
+const cors = require('cors');
+const bodyParser = require('body-parser');
+const cookieParser = require('cookie-parser');
+const app = express();
+require('dotenv').config();
+
+
+// import ERROR from middleware
+const errorHandler = require('./middleware/error')
+
+
+
+// IMPORT DATABSE
+require('./database/db');
+
+
+// IMPORT ROUTES
+const authRoutes = require('./routes/authRoutes');
+const postRoute = require('./routes/postRoute');
+
+
+// MIDDLEWARE
+app.use(morgan('dev'));
+app.use(cors());
+// app.use(bodyParser.json({ extended: true }))
+app.use(bodyParser.json({ limit: "5mb" }));
+app.use(bodyParser.urlencoded({ limit: "5mb", extended: true }));
+app.use(cookieParser());
+
+
+
+// END POINT ROUTES - ROUTES MIDDLEWARE
+app.use('/api', authRoutes)
+app.use('/api', postRoute)
+
+
+
+// ERROR MIDDLEWARE
+app.use(errorHandler);
+
+
+
+// TESTING SERVER WORKING
+app.get('/test', (req, res) => {
+    res.status(200).json({ message: 'Testing success server running' })
+})
+
+app.get('/test1', (req, res) => {
+    res.send({ code: '200', message: 'Testing success server running test1' })
+})
+
+
+// SERVER RUNNING ON THIS PORT
+const PORT = process.env.PORT || 8000;
+
+app.listen(PORT, () => console.log(`Server is running on PORT ${PORT}`));
