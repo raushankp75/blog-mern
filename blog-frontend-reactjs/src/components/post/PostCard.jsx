@@ -5,14 +5,15 @@ import { FaComment } from 'react-icons/fa'
 const PostCard = () => {
     return (
         <>
-            <div className='p-4 flex flex-col gap-3 shadow-2xl rounded-2xl'>
+            <div className='p-4 flex flex-col gap-3 shadow-perfect rounded-2xl'>
                 <div className='flex flex-row gap-4'>
                     <img src="https://www.nicepng.com/png/detail/933-9332131_profile-picture-default-png.png" alt="image" className='rounded-full w-14 h-14' />
-                    <div className='flex flex-col'>
+                    <div className='flex flex-col justify-center'>
                         <h1 className='text-lg font-semibold'>Raushan Kumar</h1>
-                        <p className='text-xs'>june 6 2023</p>
                     </div>
                 </div>
+
+                <hr />
 
                 <div>
                     <img src="https://www.freecodecamp.org/news/content/images/size/w2000/2022/09/jonatan-pie-3l3RwQdHRHg-unsplash.jpg" alt="" className='w-fit object-cover rounded-sm' />
@@ -20,6 +21,12 @@ const PostCard = () => {
 
                 <div>
                     <p className='text-sm'>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Magnam neque possimus non culpa voluptate inventore excepturi, obcaecati natus </p>
+                </div>
+
+                <hr />
+
+                <div className='flex justify-end'>
+                    <p className='text-xs'>june 6 2023</p>
                 </div>
 
                 <div className='flex flex-row justify-between'>
@@ -30,7 +37,6 @@ const PostCard = () => {
                     <div className='flex flex-row gap-2 items-center'>
                         <FaComment size={30} className='cursor-pointer' /> <span className='font-semibold'>5 Comments</span>
                     </div>
-
                 </div>
             </div>
         </>
