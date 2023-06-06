@@ -1,8 +1,15 @@
 import React from 'react'
+import PostCard from '../components/post/PostCard'
 
 const PostList = () => {
   return (
-    <div>PostList</div>
+    <>
+      <div className=''>
+        <div className='grid grid-cols-3'>
+          <PostCard />
+        </div>
+      </div>
+    </>
   )
 }
 
