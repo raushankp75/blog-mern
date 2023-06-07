@@ -3,7 +3,7 @@ import thunk from 'redux-thunk'
 import { composeWithDevTools } from '@redux-devtools/extension'
 
 // import reducers
-import { userReducerLogin, userReducerSignup } from './reducers/userReducer';
+import { userReducerLogin, userReducerLogout, userReducerProfile, userReducerSignup } from './reducers/userReducer';
 
 
 
@@ -11,11 +11,17 @@ import { userReducerLogin, userReducerSignup } from './reducers/userReducer';
 // combine reducers
 const reducer = combineReducers({
     signup: userReducerSignup,
-    login: userReducerLogin
+    login: userReducerLogin,
+    userProfile: userReducerProfile,
+    logout: userReducerLogout
 });
 
 // initial state
-let initialState = {}
+let initialState = {
+    login: {
+        userInfo: localStorage.getItem('userInfo') ? JSON.parse(localStorage.getItem('userInfo')) : null
+    }
+}
 
 const middleware = [thunk];
 

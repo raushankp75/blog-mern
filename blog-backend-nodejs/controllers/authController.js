@@ -35,7 +35,7 @@ const login = async (req, res, next) => {
         }
 
         // check user email
-        const user = await User.findOneAndDelete({ email });
+        const user = await User.findOne({ email });
         if (!user) {
             return next(new ErrorResponse('Invalid credentials', 400))
         }

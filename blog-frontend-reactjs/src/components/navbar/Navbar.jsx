@@ -1,8 +1,10 @@
 import React, { useState } from 'react'
 import { AiOutlineClose } from 'react-icons/ai'
 import { GiHamburgerMenu } from 'react-icons/gi'
+import { BsFillCaretDownFill } from 'react-icons/bs'
 import NavbarData from './NavbarData'
 import profileData from './profileData'
+
 
 const Navbar = () => {
 
@@ -32,8 +34,9 @@ const Navbar = () => {
                 <div className='flex flex-row items-center'>
                     {/* toggle profile icon open and close */}
                     <div className='relative md:right-0 right-16 cursor-pointer'>
-                        <button onClick={() => setOpenProfile(!openProfile)}>
+                        <button onClick={() => setOpenProfile(!openProfile)} className='flex flex-row items-center gap-2 text-gray-200 hover:text-blue-400'>
                             <img src="https://www.nicepng.com/png/detail/933-9332131_profile-picture-default-png.png" alt="im" className='md:w-12 md:h-12 w-8 h-8 rounded-full ' />
+                            <BsFillCaretDownFill size={25} />
                         </button>
                         <ul className={`flex flex-col py-4 absolute items-start bg-[#444] z-[-1] left-0 w-[100px] transition-all duration-500 ease-in ${openProfile ? 'md:top-16 top-14' : 'top-[-490px]'}`}>
                             {

@@ -24,7 +24,7 @@ const userSchema = new mongoose.Schema({
         type: String,
         trim: true,
         required: [true, 'Password is required'],
-        minlength: [6, 'Password must have at least 6 characters'],
+        minlength: [3, 'Password must have at least 6 characters'],
     },
     role: {
         type: String,
@@ -52,10 +52,10 @@ userSchema.methods.comparePassword = async function (enteredPassword) {
 
 
 // RETURN A JWT TOKEN
-userSchema.methods.getJwtToken = function (enteredPassword) {
+userSchema.methods.getJwtToken = function () {
     return jwt.sign({ id: this.id }, process.env.JWT_SECRET, {
-        expireIn: 3600
-    })
+        expiresIn: 3600
+    });
 }
 
 module.exports = mongoose.model('User', userSchema);
