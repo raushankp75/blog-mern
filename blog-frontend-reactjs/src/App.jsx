@@ -13,6 +13,10 @@ import Contact from './pages/Contact'
 import { Provider } from 'react-redux'
 import store from './redux/store'
 import Login from './pages/Login'
+import AdminDashboard from './admin/AdminDashboard';
+import CreatePost from './admin/CreatePost';
+import EditPost from './admin/EditPost';
+import AdminRoute from './components/AdminRoute';
 
 function App() {
   return (
@@ -23,6 +27,12 @@ function App() {
           <Routes>
             <Route path='/login' element={<Login />} />
             <Route path='/' element={<PostList />} />
+
+            {/* admin */}
+            <Route path='/admin/dashboard' element={ <AdminRoute><AdminDashboard /></AdminRoute> } />
+            <Route path='/admin/post/create' element={ <AdminRoute><CreatePost /></AdminRoute> } />
+            <Route path='/admin/post/edit' element={ <AdminRoute><EditPost /></AdminRoute> } />
+
             <Route path='/about' element={<About />} />
             <Route path='/contact' element={<Contact />} />
             <Route path='*' element={<PageNotFound />} />

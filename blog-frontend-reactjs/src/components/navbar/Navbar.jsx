@@ -5,11 +5,29 @@ import { BsFillCaretDownFill } from 'react-icons/bs'
 import NavbarData from './NavbarData'
 import profileData from './profileData'
 
+import { useDispatch } from 'react-redux'
+import { userLogoutAction } from '../../redux/actions/userAction'
+import { Link, useNavigate } from 'react-router-dom'
+
 
 const Navbar = () => {
 
     const [open, setOpen] = useState(false);
     const [openProfile, setOpenProfile] = useState(false);
+
+
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
+
+    // logout
+    const logout = () => {
+        dispatch(userLogoutAction());
+        e.preventDefault();   // keep link from immediately navigating
+        localStorage.clear(); // clear storage
+        navigate("/login");   // now navigate away
+    }
+
+
 
 
     return (
@@ -30,7 +48,7 @@ const Navbar = () => {
                     </ul>
                 </div>
 
-                
+
                 <div className='flex flex-row items-center'>
                     {/* toggle profile icon open and close */}
                     <div className='relative md:right-0 right-16 cursor-pointer'>
@@ -46,6 +64,7 @@ const Navbar = () => {
                                     </li>
                                 ))
                             }
+                            <Link to="/login" onClick={logout} className='text-white bg-red-400 px-1 my-2  rounded-md w-fit ml-4'>Logout</Link>
                         </ul>
                     </div>
                     {/* toggle hamburger menu icon for open close nav in mobile  */}

@@ -2,6 +2,10 @@ import React from 'react'
 
 const profileData = [
     {
+        name: "View Profile",
+        link: "/"
+    },
+    {
         name: "Admin",
         link: "/"
     },
@@ -13,10 +17,9 @@ const profileData = [
         name: "Login",
         link: "/login"
     },
-    {
-        name: "Logout",
-        link: "/"
-    }
+    // {
+    //     name: "Logout"
+    // }
 ]
 
 export default profileData

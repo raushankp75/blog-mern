@@ -23,9 +23,25 @@ const validationSchema = yup.object({
 
 
 const Login = () => {
+  // to navigate page
+  const navigate = useNavigate();
 
   // get data from redux
   const dispatch = useDispatch();
+
+  // authenticated
+  const { loading, isAuthenticated, userInfo } = useSelector(state => state.login);
+
+  // authenticated useEffect
+  useEffect(() => {
+    if (isAuthenticated) {
+      if (userInfo.role == 'admin') {
+        navigate('/admin/dashboard');
+      } else {
+        navigate('/user/dashboard');
+      }
+    }
+  }, [isAuthenticated])
 
 
   return (
@@ -64,7 +80,7 @@ const Login = () => {
               />
               <ErrorMessage name='password' />
 
-              <button type="submit" className='px-16 py-2 bg-blue-500 text-white font-semibold rounded-md'>Submit</button>
+              <button disabled={loading} type="submit" className='px-16 py-2 bg-blue-500 text-white font-semibold rounded-md'>{loading ? 'Loading...' : 'Login'}</button>
             </Form >
           )
         }
