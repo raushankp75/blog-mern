@@ -10,11 +10,15 @@ const PostCard = () => {
                     <img src="https://www.nicepng.com/png/detail/933-9332131_profile-picture-default-png.png" alt="image" className='rounded-full w-14 h-14' />
                     <div className='flex flex-col justify-center'>
                         <h1 className='text-lg font-semibold'>Testing Blog</h1>
-                        <p><span>Created by : </span><span>Raushan Kumar</span></p>
+                        <small><span className='font-semibold text-blue-500'>Created by : </span><span>Raushan Kumar</span></small>
                     </div>
                 </div>
 
                 <hr />
+
+                <div>
+                    <small><span className='font-semibold text-blue-500'>Category : </span><span>Tech</span></small>
+                </div>
 
                 <div>
                     <img src="https://www.freecodecamp.org/news/content/images/size/w2000/2022/09/jonatan-pie-3l3RwQdHRHg-unsplash.jpg" alt="" className='w-fit object-cover rounded-sm' />
@@ -26,7 +30,8 @@ const PostCard = () => {
 
                 <hr />
 
-                <div className='flex justify-end'>
+                <div className='flex justify-between'>
+                    <p className='text-xs'>View Detail</p>
                     <p className='text-xs'>june 6 2023</p>
                 </div>
 
@@ -35,6 +40,7 @@ const PostCard = () => {
                         <FcLikePlaceholder size={30} className='cursor-pointer' /> <span className='font-semibold'>2 Likes</span>
                     </div>
                     {/* <FcLike size={30} className='cursor-pointer' /> */}
+
                     <div className='flex flex-row gap-2 items-center'>
                         <FaComment size={30} className='cursor-pointer' /> <span className='font-semibold'>5 Comments</span>
                     </div>
