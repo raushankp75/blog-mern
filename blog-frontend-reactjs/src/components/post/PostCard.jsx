@@ -9,7 +9,8 @@ const PostCard = () => {
                 <div className='flex flex-row gap-4'>
                     <img src="https://www.nicepng.com/png/detail/933-9332131_profile-picture-default-png.png" alt="image" className='rounded-full w-14 h-14' />
                     <div className='flex flex-col justify-center'>
-                        <h1 className='text-lg font-semibold'>Raushan Kumar</h1>
+                        <h1 className='text-lg font-semibold'>Testing Blog</h1>
+                        <p><span>Created by : </span><span>Raushan Kumar</span></p>
                     </div>
                 </div>
 
