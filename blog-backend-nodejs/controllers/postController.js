@@ -3,12 +3,22 @@ const Post = require('../models/postModel');
 const ErrorResponse = require('../utils/errorResponse');
 
 
-const createPost = async (req, res, next) => {
-    const { title, content, postedBy, image, likes, comments } = req.body;
 
+const createPost = async (req, res, next) => {
+    const { post } = req.body;
+
+
+    // console.log(post)
+    const {title, content} = JSON.parse(post);
+
+    // console.log(req.body, req.files, 10)
+
+   const image = req.files.image
+
+// return res.send({data:"created"});
     try {
         // UPLOAD IMAGE IN CLOUDINARY
-        const result = await cloudinary.uploader.upload(image, {
+        const result = await cloudinary.uploader.upload(image.tempFilePath, {
             folder: 'posts',
             width: 1200,
             crop: 'scale'
@@ -33,6 +43,46 @@ const createPost = async (req, res, next) => {
     }
 }
 
+
+const createUser = async (req, res) => {
+
+    const { user } = req.body;
+    const userData = JSON.parse(user);
+
+    let profileImgResponse;
+
+    if (req.files && req.files.profileImg) {
+
+
+        const profileImg = req.files.profileImg;
+
+        profileImgResponse = await cloudinary.uploader.upload(profileImg.tempFilePath, {
+            upload_preset: 'task-tracker',
+            folder: 'task-tracker/profile-img',
+            transformation: [
+                { width: 1000, crop: "scale" },
+                { quality: 67 }
+            ]
+        });
+
+        console.log(profileImgResponse, "profileImgResponse 14 userController.js");
+    }
+
+    const newUserData = {
+        ...userData,
+    };
+
+    if (profileImgResponse) {
+        newUserData.profileImg = profileImgResponse.secure_url;
+    }
+
+    try {
+        const userDetail = await User.create(newUserData);
+        res.status(200).json(userDetail);
+    } catch (error) {
+        res.status(500).json({ error: 'Server error' });
+    }
+}
 
 
 const viewPosts = async (req, res, next) => {

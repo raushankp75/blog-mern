@@ -13,10 +13,10 @@ const profileData = [
         name: "User",
         link: "/"
     },
-    {
-        name: "Login",
-        link: "/login"
-    },
+    // {
+    //     name: "Login",
+    //     link: "/login"
+    // },
     // {
     //     name: "Logout"
     // }

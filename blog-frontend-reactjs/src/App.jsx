@@ -8,16 +8,22 @@ import PageNotFound from './pages/PageNotFound'
 import Layout from './layout/Layout'
 import About from './pages/About'
 import Contact from './pages/Contact'
+import Login from './pages/Login'
+
+import CreatePost from './pages/CreatePost';
+import EditPost from './pages/EditPost';
+
 
 // configure store
 import { Provider } from 'react-redux'
 import store from './redux/store'
-import Login from './pages/Login'
+
+
 import AdminDashboard from './admin/AdminDashboard';
-import CreatePost from './admin/CreatePost';
-import EditPost from './admin/EditPost';
 import AdminRoute from './components/AdminRoute';
-import Banner from './components/Banner';
+
+
+
 
 function App() {
   return (
@@ -28,15 +34,16 @@ function App() {
           <Routes>
             <Route path='/login' element={<Login />} />
             <Route path='/' element={<PostList />} />
-
-            {/* admin */}
-            <Route path='/admin/dashboard' element={ <AdminRoute><AdminDashboard /></AdminRoute> } />
-            <Route path='/admin/post/create' element={ <AdminRoute><CreatePost /></AdminRoute> } />
-            <Route path='/admin/post/edit' element={ <AdminRoute><EditPost /></AdminRoute> } />
-
             <Route path='/about' element={<About />} />
             <Route path='/contact' element={<Contact />} />
             <Route path='*' element={<PageNotFound />} />
+
+            {/* admin */}
+            <Route path='/admin/dashboard' element={ <AdminRoute><AdminDashboard /></AdminRoute> } />
+
+            {/* for both admin and user */}
+            <Route path='post/create' element={ <CreatePost /> } />
+            <Route path='post/edit' element={ <EditPost /> } />
           </Routes>
         </Layout>
       </Provider>

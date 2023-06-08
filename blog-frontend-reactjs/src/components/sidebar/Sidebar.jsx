@@ -12,9 +12,9 @@ const Sidebar = () => {
   const navigate = useNavigate();
 
   // get user data
-  useEffect(() => {
-    dispatch(userProfileAction());
-  }, []);
+  // useEffect(() => {
+  //   dispatch(userProfileAction());
+  // }, []);
 
 
   // logout

@@ -2,7 +2,7 @@ import React from 'react'
 
 const NavbarData = [
         {
-            name: "Home",
+            name: "All Post",
             link: "/"
         },
         {

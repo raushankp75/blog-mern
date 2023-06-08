@@ -7,7 +7,7 @@ const SidebarData = [
         },
         {
             name: "Create Post",
-            link: "/admin/post/create"
+            link: "post/create"
         }
     ]
 

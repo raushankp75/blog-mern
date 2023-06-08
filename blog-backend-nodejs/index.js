@@ -3,8 +3,13 @@ const morgan = require('morgan')
 const cors = require('cors');
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
+const fileUpload = require('express-fileupload');
 const app = express();
 require('dotenv').config();
+
+app.use(fileUpload({
+    useTempFiles: true
+}));
 
 
 // import ERROR from middleware
@@ -23,7 +28,10 @@ const postRoute = require('./routes/postRoute');
 
 // MIDDLEWARE
 app.use(morgan('dev'));
-app.use(cors());
+app.use(cors( {
+    origin: 'http://localhost:5173',
+    credentials: true
+}));
 // app.use(bodyParser.json({ extended: true }))
 app.use(bodyParser.json({ limit: "5mb" }));
 app.use(bodyParser.urlencoded({ limit: "5mb", extended: true }));

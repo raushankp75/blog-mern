@@ -8,17 +8,13 @@ const PostList = () => {
       <div className=''>
         <Banner />
         <div className='grid md:grid-cols-3 grid-cols-1 gap-8'>
-          <PostCard />
-          <PostCard />
-          <PostCard />
-          <PostCard />
-          <PostCard />
-          <PostCard />
-          <PostCard />
-          <PostCard />
-          <PostCard />
-          <PostCard />
-          <PostCard />
+         <PostCard />
+         <PostCard />
+         <PostCard />
+         <PostCard />
+         <PostCard />
+         <PostCard />
+         <PostCard />
         </div>
       </div>
     </>

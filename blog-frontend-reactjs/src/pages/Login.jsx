@@ -30,7 +30,9 @@ const Login = () => {
   const dispatch = useDispatch();
 
   // authenticated
-  const { loading, isAuthenticated, userInfo } = useSelector(state => state.login);
+  const {loading, isAuthenticated, userInfo } = useSelector(state => state.login);
+
+  console.log(isAuthenticated, userInfo)
 
   // authenticated useEffect
   useEffect(() => {
@@ -38,7 +40,7 @@ const Login = () => {
       if (userInfo.role == 'admin') {
         navigate('/admin/dashboard');
       } else {
-        navigate('/user/dashboard');
+        navigate('/');
       }
     }
   }, [isAuthenticated])
@@ -64,28 +66,6 @@ const Login = () => {
         {
           ({ values, setFieldValue }) => (
             <Form>
-              {/* <Field
-                name="email"
-                id="email"
-                type="text"
-                placeholder=""
-              />
-              <ErrorMessage name='email' />
-
-              <Field
-                name="password"
-                id="password"
-                type="text"
-                placeholder=""
-              />
-              <ErrorMessage name='password' /> */}
-
-              {/* <button disabled={loading} type="submit" className='px-16 py-2 bg-blue-500 text-white font-semibold rounded-md'>{loading ? 'Loading...' : 'Login'}</button> */}
-
-
-
-
-
               < div className="flex items-center justify-center min-h-fit bg-gray-100">
                 <div className="relative flex flex-col m-6 space-y-8 bg-white shadow-2xl rounded-2xl md:flex-row md:space-y-0">
                   {/* left */}
@@ -112,10 +92,11 @@ const Login = () => {
                     </div>
                     <small className='w-full pb-4'><ErrorMessage name='password' /></small>
                     <button disabled={loading} type="submit" className="w-full bg-blue-500 text-white p-2 rounded-lg mb-6 hover:bg-white hover:text-black hover:border hover:border-gray-300">{loading ? 'Loading...' : 'Login'}</button>
+                    {/* <button type="submit" className="w-full bg-blue-500 text-white p-2 rounded-lg mb-6 hover:bg-white hover:text-black hover:border hover:border-gray-300">Login</button> */}
 
                     <div className="text-center text-gray-400">
                       Dont'have an account?
-                      <span className="font-bold text-black">Sign up for free</span>
+                      <span className="font-bold text-black">Sign up</span>
                     </div>
                   </div>
                   {/* right */}

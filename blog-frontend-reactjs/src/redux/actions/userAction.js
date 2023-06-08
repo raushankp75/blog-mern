@@ -9,7 +9,12 @@ export const userSignupAction = (user) => async (dispatch) => {
     dispatch({ type: USER_SIGNUP_REQUEST });
 
     try {
-        const { data } = await axios.post('http://localhost:8000/api/signup', user);
+        const { data } = await axios.post('http://localhost:8000/api/signup', user, {
+            headers: {
+                "Content-Type": "application/json"
+            },
+            withCredentials: true,    // IMPORTANT!!!
+        });
         dispatch({
             type: USER_SIGNUP_SUCCESS,
             payload: data
@@ -17,7 +22,7 @@ export const userSignupAction = (user) => async (dispatch) => {
         toast.success('Register Successfully')
 
     } catch (error) {
-        dispatch ({
+        dispatch({
             type: USER_SIGNUP_FAIL,
             payload: error.response.data.error
         })
@@ -26,6 +31,28 @@ export const userSignupAction = (user) => async (dispatch) => {
 }
 
 
+// axios.post("http://localhost:3000/auth/login", data, {
+//     headers: {
+//       "Content-Type": "application/json"
+//     },
+//     withCredentials: true,    // IMPORTANT!!!
+//   })
+//     .then(res => {
+
+
+
+//       localStorage.setItem("role", res.data.user.role)
+//       localStorage.setItem("refreshToken", res.data.refreshToken)
+//       localStorage.setItem("expDate", res.data.expDate)
+
+//       setRole(localStorage.getItem("role"))
+//       navigate("/tenderlist")
+//       // }
+
+//     }).catch(err => {
+//       console.log(err);
+//     })
+// }
 
 
 // login action
@@ -33,7 +60,12 @@ export const userLoginAction = (user) => async (dispatch) => {
     dispatch({ type: USER_LOGIN_REQUEST });
 
     try {
-        const { data } = await axios.post('http://localhost:8000/api/login', user);
+        const { data } = await axios.post('http://localhost:8000/api/login', user, {
+            headers: {
+                "Content-Type": "application/json"
+            },
+            withCredentials: true,    // IMPORTANT!!!
+        });
         localStorage.setItem('userInfo', JSON.stringify(data));
         dispatch({
             type: USER_LOGIN_SUCCESS,
@@ -42,7 +74,7 @@ export const userLoginAction = (user) => async (dispatch) => {
         toast.success('Login Successfully')
 
     } catch (error) {
-        dispatch ({
+        dispatch({
             type: USER_LOGIN_FAIL,
             payload: error.response.data.error
         })
@@ -58,14 +90,19 @@ export const userProfileAction = () => async (dispatch) => {
     dispatch({ type: USER_LOAD_REQUEST });
 
     try {
-        const { data } = await axios.get('http://localhost:8000/api/me');
+        const { data } = await axios.get('http://localhost:8000/api/me', {
+            headers: {
+                "Content-Type": "application/json"
+            },
+            withCredentials: true,    // IMPORTANT!!!
+        });
         dispatch({
             type: USER_LOAD_SUCCESS,
             payload: data
         });
 
     } catch (error) {
-        dispatch ({
+        dispatch({
             type: USER_LOAD_FAIL,
             payload: error.response.data.error
         })
@@ -81,14 +118,19 @@ export const userLogoutAction = () => async (dispatch) => {
 
     try {
         localStorage.removeItem('userInfo');
-        const { data } = await axios.get('http://localhost:8000/api/logout');
+        const { data } = await axios.get('http://localhost:8000/api/logout', {
+            headers: {
+                "Content-Type": "application/json"
+            },
+            withCredentials: true,    // IMPORTANT!!!
+        });
         dispatch({
             type: USER_LOGOUT_SUCCESS,
             payload: data
         });
         toast.success('Logout Successfully');
     } catch (error) {
-        dispatch ({
+        dispatch({
             type: USER_LOGOUT_FAIL,
             payload: error.response.data.error
         })
