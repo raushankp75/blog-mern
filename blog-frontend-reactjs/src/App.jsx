@@ -17,6 +17,7 @@ import AdminDashboard from './admin/AdminDashboard';
 import CreatePost from './admin/CreatePost';
 import EditPost from './admin/EditPost';
 import AdminRoute from './components/AdminRoute';
+import Banner from './components/Banner';
 
 function App() {
   return (

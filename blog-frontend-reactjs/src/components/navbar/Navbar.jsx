@@ -56,10 +56,10 @@ const Navbar = () => {
                             <img src="https://www.nicepng.com/png/detail/933-9332131_profile-picture-default-png.png" alt="im" className='md:w-12 md:h-12 w-8 h-8 rounded-full ' />
                             <BsFillCaretDownFill size={25} />
                         </button>
-                        <ul className={`flex flex-col py-4 absolute items-start bg-[#444] z-[-1] left-0 w-[100px] transition-all duration-500 ease-in ${openProfile ? 'md:top-16 top-14' : 'top-[-490px]'}`}>
+                        <ul className={`flex flex-col py-4 absolute items-start bg-[#444] z-[-1] left-0 w-[120px] transition-all duration-500 ease-in ${openProfile ? 'md:top-16 top-14' : 'top-[-490px]'}`}>
                             {
                                 profileData?.map((nav) => (
-                                    <li key={nav?.name} className='ml-4 my-0 py-2'>
+                                    <li key={nav?.name} className='mx-4 my-0 py-2'>
                                         <a href={nav?.link} className='text-gray-200 hover:text-gray-400 duration-500'>{nav?.name}</a>
                                     </li>
                                 ))
@@ -68,7 +68,7 @@ const Navbar = () => {
                         </ul>
                     </div>
                     {/* toggle hamburger menu icon for open close nav in mobile  */}
-                    <div onClick={() => setOpen(!open)} className='text-3xl absolute  cursor-pointer md:hidden text-gray-200'>
+                    <div onClick={() => setOpen(!open)} className='text-3xl absolute right-6  cursor-pointer md:hidden text-gray-200'>
                         {open ? <AiOutlineClose /> : <GiHamburgerMenu />}
                     </div>
                 </div>
