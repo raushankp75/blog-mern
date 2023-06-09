@@ -36,9 +36,9 @@ const CreatePost = () => {
   // console.log(pic)
 
 
-  // const { isAuthenticated } = useSelector(state => state.login);
+  const { isAuthenticated } = useSelector(state => state.login);
 
-  // console.log(isAuthenticated, 25)
+  console.log(isAuthenticated, 25)
 
 
   const createNewPost = async (values) => {

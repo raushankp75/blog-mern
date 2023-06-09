@@ -14,7 +14,7 @@ const Layout = ({ children }) => {
             {userInfo && userInfo.role === 'admin' ?
                 <>
                     <Sidebar />
-                    <main className="max-w-[1400px] overflow-y-auto h-screen flex-1 md:mx-auto mr-6 -ml-10 py-5 flex justify-center items-center">{children}</main>
+                    <main className="max-w-[1400px] overflow-y-auto h-screen flex-1 md:mx-auto mr-6 -ml-10 py-5 flex justify-center my-10">{children}</main>
                 </>
                 :
                 <>
