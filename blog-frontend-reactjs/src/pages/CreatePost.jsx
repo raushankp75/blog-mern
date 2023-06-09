@@ -17,13 +17,13 @@ import axios from 'axios';
 // validation
 const validationSchema = yup.object({
   title: yup
-      .string('Add a post title')
-      .min(4, 'text content should havea minimum of 4 characters ')
-      .required('Post title is required'),
+    .string('Add a post title')
+    .min(4, 'text content should havea minimum of 4 characters ')
+    .required('Post title is required'),
   content: yup
-      .string('Add text content')
-      .min(10, 'text content should havea minimum of 10 characters ')
-      .required('text content is required'),
+    .string('Add text content')
+    .min(10, 'text content should havea minimum of 10 characters ')
+    .required('text content is required'),
 });
 
 
@@ -42,7 +42,7 @@ const CreatePost = () => {
 
 
   const createNewPost = async (values) => {
-console.log(values)
+    console.log(values)
 
     try {
       const { data } = await axios.post('http://localhost:8000/api/post/create', values, {
@@ -50,7 +50,7 @@ console.log(values)
           'Content-Type': 'multipart/form-data'
         },
         withCredentials: true,    // IMPORTANT!!!
-    });
+      });
       toast.success('post created');
     } catch (error) {
       console.log(error);
@@ -77,7 +77,7 @@ console.log(values)
           vals.append("post", JSON.stringify(values))
           vals.append("image", pic)
 
-          
+
           createNewPost(vals);
           // actions.resetForm();
         }}
