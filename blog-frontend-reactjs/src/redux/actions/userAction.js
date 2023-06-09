@@ -11,7 +11,7 @@ export const userSignupAction = (user) => async (dispatch) => {
     try {
         const { data } = await axios.post('http://localhost:8000/api/signup', user, {
             headers: {
-                "Content-Type": "application/json"
+                "Content-Type": "multipart/form-data"
             },
             withCredentials: true,    // IMPORTANT!!!
         });

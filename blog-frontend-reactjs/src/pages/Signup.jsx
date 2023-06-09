@@ -2,9 +2,10 @@ import React, { useState, useEffect } from 'react';
 import { Formik, Field, Form, ErrorMessage } from 'formik';
 import * as yup from 'yup';
 import { toast } from 'react-toastify';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom'
 import axios from 'axios';
+// import { userSignupAction } from '../redux/actions/userAction';
 
 
 
@@ -29,6 +30,14 @@ const validationSchema = yup.object({
 
 const Signup = () => {
 
+  const [profilePic, setProfilePic] = useState("")
+
+  // to navigate page
+  const navigate = useNavigate();
+
+  // get data from redux
+  const dispatch = useDispatch();
+
   // authenticated
   const { loading } = useSelector(state => state.login);
 
@@ -45,6 +54,7 @@ const Signup = () => {
         withCredentials: true,    // IMPORTANT!!!
       });
       toast.success('Signup Successfully');
+      navigate('/login')
     } catch (error) {
       console.log(error);
       toast.error(error);
@@ -63,9 +73,17 @@ const Signup = () => {
 
         validationSchema={validationSchema}
         onSubmit={async (values, actions) => {
+          await new Promise((r) => setTimeout(r, 500));
           // alert(JSON.stringify(values, null, 2))
-          handleSignup(values);
+
+          let vals = new FormData()
+          vals.append("userSignup", JSON.stringify(values))
+          vals.append("image", profilePic)
+
+          // dispatch(userSignupAction(vals));
+          handleSignup(vals);
           actions.resetForm();
+          // navigate('/login')
         }}
       >
 
@@ -108,6 +126,17 @@ const Signup = () => {
                       />
                     </div>
                     <small className='w-full pb-4'><ErrorMessage name='password' /></small>
+                    <div className="pt-4">
+                      <span className="mb-2 text-md">Profile Image</span>
+                      <input
+                        name='image'
+                        id='image'
+                        type="file"
+                        onChange={(event) => {
+                          setProfilePic(event.target.files[0])
+                        }}
+                      />
+                    </div>
                     <button disabled={loading} type="submit" className="w-full bg-blue-500 text-white p-2 rounded-lg mb-6 hover:bg-white hover:text-black hover:border hover:border-gray-300">{loading ? 'Loading...' : 'Login'}</button>
                     {/* <button type="submit" className="w-full bg-blue-500 text-white p-2 rounded-lg mb-6 hover:bg-white hover:text-black hover:border hover:border-gray-300">Login</button> */}
 

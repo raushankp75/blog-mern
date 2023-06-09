@@ -1,21 +1,49 @@
+const cloudinary = require('../utils/cloudinary');
 const User = require('../models/userModel');
 const ErrorResponse = require('../utils/errorResponse')
 
 
 const signup = async (req, res, next) => {
-    const { email } = req.body;
+    const { userSignup } = req.body;
+
+    console.log(userSignup)
+
+    const { name, email, password } = JSON.parse(userSignup);
+
+    const image = req.files.image
+
+    console.log(image)
+
+
+    // const { email } = req.body;
     const userExists = await User.findOneAndDelete({ email });
 
     if (userExists) {
         return next(new ErrorResponse('Email id already register', 400));
     }
     try {
-        const user = await User.create(req.body);
-        res.status(201).json({
+        // UPLOAD IMAGE IN CLOUDINARY
+        const result = await cloudinary.uploader.upload(image.tempFilePath, {
+            folder: 'profileImg',
+            width: 1200,
+            crop: 'scale'
+        })
+        // const user = await User.create(req.body);
+        const user = await User.create({
+            name,
+            email,
+            password,
+            image: {
+                public_id: result.public_id,
+                url: result.secure_url
+            }
+        })
+        res.status(200).json({
             success: true,
             user
         })
     } catch (error) {
+        console.log(error);
         next(error);
     }
 }

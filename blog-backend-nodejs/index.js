@@ -7,6 +7,8 @@ const fileUpload = require('express-fileupload');
 const app = express();
 require('dotenv').config();
 
+
+// upload file in cloudinary
 app.use(fileUpload({
     useTempFiles: true
 }));
