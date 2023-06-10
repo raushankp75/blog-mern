@@ -32,7 +32,7 @@ const createPost = async (req, res, next) => {
                 url: result.secure_url
             }
         })
-        res.status(201).json({
+        res.status(200).json({
             success: true,
             post
         })
@@ -139,7 +139,10 @@ const deletePost = async (req, res, next) => {
 
 const updatePost = async (req, res, next) => {
     try {
-        const { title, content, image } = req.body;
+        const { post } = req.body;
+        const { title, content } = JSON.parse(post);
+        const image = req.files.image
+
         const currentPost = await Post.findById(req.params.id);
 
         // BUILD THE OBJECT DATA
@@ -150,12 +153,12 @@ const updatePost = async (req, res, next) => {
         }
 
         // MODIFY POST IMAGE CONDITIONALLY
-        if (req.body.image !== '') {
+        if (req.files.image !== '') {
             const ImgId = currentPost.image.public_id;
             if (ImgId) {
                 await cloudinary.uploader.destroy(ImgId);
             }
-            const newImage = await cloudinary.uploder.upload(req.body.image, {
+            const newImage = await cloudinary.uploder.upload(req.files.image.tempFilePath, {
                 folder: 'posts',
                 width: 1200,
                 crop: 'scale'
@@ -176,6 +179,7 @@ const updatePost = async (req, res, next) => {
         })
 
     } catch (error) {
+        console.log(error);
         next(error);
     }
 }

@@ -26,6 +26,7 @@ import Signup from './pages/Signup';
 
 
 
+
 function App() {
   return (
     <>
@@ -45,7 +46,8 @@ function App() {
 
             {/* for both admin and user */}
             <Route path='post/create' element={ <CreatePost /> } />
-            <Route path='post/edit/:_id' element={ <EditPost /> } />
+            <Route path='/post/edit/:id' element={ <EditPost /> } />
+            
           </Routes>
         </Layout>
       </Provider>

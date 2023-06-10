@@ -32,6 +32,8 @@ const validationSchema = yup.object({
 
 const CreatePost = () => {
 
+  const navigate = useNavigate();
+
   const [pic, sePic] = useState("")
 
   // console.log(pic)
@@ -52,7 +54,10 @@ const CreatePost = () => {
         },
         withCredentials: true,    // IMPORTANT!!!
       });
-      toast.success('post created');
+      if (data.success === true) {
+        toast.success('post created');
+        navigate('/admin/dashboard')
+      }
     } catch (error) {
       console.log(error);
       toast.error(error);

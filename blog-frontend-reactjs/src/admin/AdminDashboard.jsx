@@ -62,7 +62,12 @@ const AdminDashboard = () => {
         // console.log(id)
         if (window.confirm("Are you sure you want to delete this post?")) {
             try {
-                const { data } = await axios.delete(`http://localhost:8000/api/delete/post/${id}`);
+                const { data } = await axios.delete(`http://localhost:8000/api/delete/post/${id}`, {
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    withCredentials: true,    // IMPORTANT!!!
+                })
                 if (data.success === true) {
                     toast.success(data.message);
                     getPost();
@@ -135,27 +140,19 @@ const AdminDashboard = () => {
             width: 100,
             cell: (row) => (
                 <div className='flex justify-between w-[170px]'>
-                    <Link to={`post/edit/${row._id}`}>
+                    <Link to={`/post/edit/${row?._id}`}>
                         <button>
                             <MdEditDocument />
                             {/* Edit */}
                         </button>
                     </Link>
-                    <button onClick={(e) => deletePostById(e, row._id)}>
+                    <button onClick={(e) => deletePostById(e, row?._id)}>
                         <AiFillDelete />
                     </button>
 
                 </div>
             )
         },
-        // {
-        //     cell: row =>
-        //         <button
-        //             onClick={() => alert(row?._id)}
-        //         >
-        //             Delete
-        //         </button>
-        // }
     ]
 
 
