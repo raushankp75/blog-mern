@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import DataTable from 'react-data-table-component';
 import axios from 'axios';
+import GoBack from '../components/goBack';
 
 const AdminDashboard = () => {
     const [data, setData] = useState([]);
@@ -108,12 +109,13 @@ const AdminDashboard = () => {
     return (
         
         <div>
+            <GoBack />
             <DataTable
                 columns={columns}
                 data={filteredName}
                 pagination
                 fixedHeader
-                fixedHeaderScrollHeight='540px'
+                fixedHeaderScrollHeight='480px'
                 highlightOnHover
                 // actions = {
                 //     <button>Export</button>

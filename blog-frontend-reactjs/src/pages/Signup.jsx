@@ -3,7 +3,7 @@ import { Formik, Field, Form, ErrorMessage } from 'formik';
 import * as yup from 'yup';
 import { toast } from 'react-toastify';
 import { useDispatch, useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import axios from 'axios';
 // import { userSignupAction } from '../redux/actions/userAction';
 
@@ -96,7 +96,7 @@ const Signup = () => {
                   {/* left */}
                   <div className="flex flex-col justify-center p-8 md:p-14">
                     <span className="mb-3 text-xl font-bold">Fill detail to signup</span>
-                    <div className="pt-4">
+                    <div className="">
                       <span className="mb-2 text-md">Name</span>
                       <Field
                         name="name"
@@ -106,7 +106,7 @@ const Signup = () => {
                       />
                     </div>
                     <small className='w-full pb-4'><ErrorMessage name='name' /></small>
-                    <div className="pt-4">
+                    <div className="">
                       <span className="mb-2 text-md">Email</span>
                       <Field
                         name="email"
@@ -116,7 +116,7 @@ const Signup = () => {
                       />
                     </div>
                     <small className='w-full pb-4'><ErrorMessage name='email' /></small>
-                    <div className="pt-4">
+                    <div className="">
                       <span className="mb-2 text-md">Password</span>
                       <Field
                         name="password"
@@ -126,7 +126,7 @@ const Signup = () => {
                       />
                     </div>
                     <small className='w-full pb-4'><ErrorMessage name='password' /></small>
-                    <div className="pt-4">
+                    <div className="flex flex-col">
                       <span className="mb-2 text-md">Profile Image</span>
                       <input
                         name='image'
@@ -140,9 +140,9 @@ const Signup = () => {
                     <button disabled={loading} type="submit" className="w-full bg-blue-500 text-white p-2 rounded-lg mb-6 hover:bg-white hover:text-black hover:border hover:border-gray-300">{loading ? 'Loading...' : 'Login'}</button>
                     {/* <button type="submit" className="w-full bg-blue-500 text-white p-2 rounded-lg mb-6 hover:bg-white hover:text-black hover:border hover:border-gray-300">Login</button> */}
 
-                    <div className="text-center text-gray-400">
-                      Dont'have an account?
-                      <span className="font-bold text-black">Sign up</span>
+                    <div className="flex gap-2 text-gray-400">
+                      <p>Already Signup?</p>
+                      <Link to='/login' className="font-bold text-blue-400">Login</Link>
                     </div>
                   </div>
                   {/* right */}

@@ -1,8 +1,12 @@
 import React from 'react'
+import GoBack from '../components/goBack'
 
 const Contact = () => {
   return (
-    <div>Contact</div>
+    <div>
+      <GoBack />
+      Contact
+      </div>
   )
 }
 
