@@ -3,6 +3,15 @@ import DataTable from 'react-data-table-component';
 import axios from 'axios';
 import GoBack from '../components/goBack';
 
+import { Link } from 'react-router-dom';
+
+import { AiFillDelete } from 'react-icons/ai'
+import { MdEditDocument } from 'react-icons/md'
+import { toast } from 'react-toastify';
+
+// format date
+import format from 'date-fns/format'
+
 const AdminDashboard = () => {
     const [data, setData] = useState([]);
 
@@ -10,7 +19,7 @@ const AdminDashboard = () => {
 
     const [filteredName, setFilteredName] = useState([]);
 
-
+    // view post list
     const getPost = async () => {
         try {
             const response = await axios.get('http://localhost:8000/api/posts/view', {
@@ -47,6 +56,27 @@ const AdminDashboard = () => {
 
 
 
+
+    // delete post by ID
+    const deletePostById = async (e, id) => {
+        // console.log(id)
+        if (window.confirm("Are you sure you want to delete this post?")) {
+            try {
+                const { data } = await axios.delete(`http://localhost:8000/api/delete/post/${id}`);
+                if (data.success === true) {
+                    toast.success(data.message);
+                    getPost();
+                }
+            } catch (error) {
+                console.log(error);
+                toast.error(error);
+            }
+        }
+    }
+
+
+
+
     const columns = [
         {
             name: "Posted By",
@@ -71,43 +101,68 @@ const AdminDashboard = () => {
         // },
         {
             name: "Likes",
-            selector: (row) => row?.likes,
+            selector: (row) => row?.likes.length,
         },
         {
             name: "Comments",
-            selector: (row) => row?.comments,
+            selector: (row) => row?.comments.length,
         },
         {
             name: "Created At",
-            selector: (row) => row.createdAt,
-            renderCell: (params) => (
-                moment(params.row.createdAt).format('YYYY-MM-DD HH:MM:SS')
-            ),
+            // selector: (row) => row.createdAt,
+            // selector: row => new Date(row.createdAt).toLocaleString(),
+            selector: (row) => format(new Date(row.createdAt), 'MM/dd/yyyy, HH:MM'),
+            // renderCell: (params) => (
+            //     moment(params.row.createdAt).format('YYYY-MM-DD HH:MM:SS')
+            // ),
+
+            sortable: true,
+            minWidth: "180px"
         },
+        // {
+        //     name: "Time",
+        //     selector: (row) => format(new Date(row.createdAt), 'HH:MM'),
+        // },
         {
             name: "Action",
-            cell: row =>
-                <button
-                    onClick={() => alert(row?._id)}
-                >
-                    Edit
-                </button>
+            // cell: row =>
+            //     <button
+            //         onClick={() => alert(row?._id)}
+            //     >
+            //         Edit
+            //     </button>
+
+            width: 100,
+            cell: (row) => (
+                <div className='flex justify-between w-[170px]'>
+                    <Link to={`post/edit/${row._id}`}>
+                        <button>
+                            <MdEditDocument />
+                            {/* Edit */}
+                        </button>
+                    </Link>
+                    <button onClick={(e) => deletePostById(e, row._id)}>
+                        <AiFillDelete />
+                    </button>
+
+                </div>
+            )
         },
-        {
-            cell: row =>
-                <button
-                    onClick={() => alert(row?._id)}
-                >
-                    Delete
-                </button>
-        }
+        // {
+        //     cell: row =>
+        //         <button
+        //             onClick={() => alert(row?._id)}
+        //         >
+        //             Delete
+        //         </button>
+        // }
     ]
 
 
 
 
     return (
-        
+
         <div>
             <GoBack />
             <DataTable
@@ -133,7 +188,7 @@ const AdminDashboard = () => {
                         onChange={(e) => setSearch(e.target.value)}
                     />
                 }
-                // subHeaderAlign='left'
+            // subHeaderAlign='left'
             />
 
             {/* {

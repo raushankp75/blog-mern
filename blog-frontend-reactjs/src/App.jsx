@@ -45,7 +45,7 @@ function App() {
 
             {/* for both admin and user */}
             <Route path='post/create' element={ <CreatePost /> } />
-            <Route path='post/edit' element={ <EditPost /> } />
+            <Route path='post/edit/:_id' element={ <EditPost /> } />
           </Routes>
         </Layout>
       </Provider>
