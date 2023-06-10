@@ -22,6 +22,7 @@ import store from './redux/store'
 import AdminDashboard from './admin/AdminDashboard';
 import AdminRoute from './components/AdminRoute';
 import Signup from './pages/Signup';
+import Profile from './pages/profile';
 
 
 
@@ -39,6 +40,7 @@ function App() {
             <Route path='/' element={<PostList />} />
             <Route path='/about' element={<About />} />
             <Route path='/contact' element={<Contact />} />
+            <Route path='/profile' element={ <Profile /> } />
             <Route path='*' element={<PageNotFound />} />
 
             {/* admin */}

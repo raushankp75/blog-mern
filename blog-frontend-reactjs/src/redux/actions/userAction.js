@@ -11,7 +11,7 @@ export const userSignupAction = (user) => async (dispatch) => {
     try {
         const { data } = await axios.post('http://localhost:8000/api/signup', user, {
             headers: {
-                "Content-Type": "multipart/form-data"
+                "Content-Type": "application/json"
             },
             withCredentials: true,    // IMPORTANT!!!
         });
@@ -86,7 +86,7 @@ export const userLoginAction = (user) => async (dispatch) => {
 
 
 // user profile action
-export const userProfileAction = () => async (dispatch) => {
+export const userProfileAction = (user) => async (dispatch) => {
     dispatch({ type: USER_LOAD_REQUEST });
 
     try {

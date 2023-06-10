@@ -20,7 +20,7 @@ const Layout = ({ children }) => {
                 :
                 <>
                     <Navbar />
-                    <main className='overflow-y-auto h-screen md:py-14 py-12 md:px-44 px-4'>{children}</main>
+                    <main className='overflow-y-auto h-screen md:py-20 py-12 md:px-44 px-4'>{children}</main>
                     <Footer />
                 </>
             }

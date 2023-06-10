@@ -3,7 +3,7 @@ import React from 'react'
 const profileData = [
     {
         name: "View Profile",
-        link: "/"
+        link: "/profile"
     },
     {
         name: "Admin",
