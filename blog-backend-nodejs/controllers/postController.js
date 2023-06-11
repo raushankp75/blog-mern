@@ -100,7 +100,7 @@ const viewPosts = async (req, res, next) => {
 
 const viewSinglePost = async (req, res, next) => {
     try {
-        const posts = await Post.findById(req.params.id).populate('comments.postedBy', 'name');
+        const posts = await Post.findById(req.params.id).populate('postedBy comments.postedBy', 'name image');
         res.status(200).json({
             success: true,
             posts
