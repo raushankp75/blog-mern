@@ -9,11 +9,15 @@ import { useDispatch, useSelector } from 'react-redux';
 // format date
 // import format from 'date-fns/format'
 import moment from 'moment'
+import Loader from '../Loader';
 
 
 
 
 const PostCard = () => {
+
+
+    const [IsLoading, setIsLoading] = useState(false);
 
     const { id } = useParams();
 
@@ -21,18 +25,22 @@ const PostCard = () => {
 
     // view post list
     const getPost = async () => {
-        try {
-            const response = await axios.get('http://localhost:8000/api/posts/view', {
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                withCredentials: true,    // IMPORTANT!!!
-            })
-            setData(response.data.posts);
-            console.log(response.data.posts)
-        } catch (error) {
-            console.log(error)
-        }
+        // setTimeout(() => {
+            setIsLoading(true);
+            try {
+                const response = await axios.get('http://localhost:8000/api/posts/view', {
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    withCredentials: true,    // IMPORTANT!!!
+                })
+                setData(response.data.posts);
+                console.log(response.data.posts)
+                setIsLoading(false);
+            } catch (error) {
+                console.log(error)
+            }
+        // }, 2000)
     };
 
     useEffect(() => {
@@ -90,6 +98,7 @@ const PostCard = () => {
     return (
         <>
             {
+                IsLoading ? <Loader /> :
                 data && data.map((post, index) => {
                     return (
 
@@ -105,10 +114,8 @@ const PostCard = () => {
 
                             <hr />
 
-
-
                             <Link to={`/post/${post._id}`}>
-                                <img src={post?.image?.url} alt="" className='w-fit h-48 rounded-sm' />
+                                <img src={post?.image?.url} alt="" className='w-[100%] h-60 rounded-sm' />
                             </Link>
 
                             <div>
