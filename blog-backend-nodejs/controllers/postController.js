@@ -87,7 +87,7 @@ const createPost = async (req, res, next) => {
 
 const viewPosts = async (req, res, next) => {
     try {
-        const posts = await Post.find().sort({ createdAt: -1 }).populate('postedBy', 'name');
+        const posts = await Post.find().sort({ createdAt: -1 }).populate('postedBy', 'name image');
         res.status(200).json({
             success: true,
             posts
@@ -207,21 +207,28 @@ const addComment = async (req, res, next) => {
 
 
 
+//add like
 const addLike = async (req, res, next) => {
+
     try {
         const post = await Post.findByIdAndUpdate(req.params.id, {
             $addToSet: { likes: req.user._id }
         },
             { new: true }
-        )
+        );
+        const posts = await Post.find().sort({ createdAt: -1 }).populate('postedBy', 'name');
+        main.io.emit('add-like', posts);
+
         res.status(200).json({
             success: true,
-            post
+            post,
+            posts
         })
 
     } catch (error) {
         next(error);
     }
+
 }
 
 

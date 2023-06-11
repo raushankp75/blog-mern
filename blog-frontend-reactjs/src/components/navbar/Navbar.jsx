@@ -38,11 +38,11 @@ const Navbar = () => {
 
     // authenticated useEffect -  if authenticated function run for show user peofile image
     useEffect(() => {
-        if (isAuthenticated) {
+        if (userInfo) {
             // get user data
             dispatch(userProfileAction());
         }
-    }, [isAuthenticated])
+    }, [userInfo])
     const { user } = useSelector(state => state.userProfile);
 
 

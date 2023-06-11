@@ -111,7 +111,7 @@ const Login = () => {
                       className="absolute hidden bottom-10 right-6 p-6 bg-white bg-opacity-30 backdrop-blur-sm rounded drop-shadow-lg md:block"
                     >
                       <span className="text-orange-800 text-xl"
-                      ><h1 className='text-2xl font-bold text-blue-800'>A blog website</h1>You can create and manage your blog's. Let's Login to continue
+                      ><h1 className='text-xl font-bold text-blue-800'>A blog website</h1>You can create and manage your blog's. Let's Login to continue
                       </span>
                     </div>
                   </div>

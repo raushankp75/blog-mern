@@ -23,6 +23,7 @@ import AdminDashboard from './admin/AdminDashboard';
 import AdminRoute from './components/AdminRoute';
 import Signup from './pages/Signup';
 import Profile from './pages/profile';
+import Post from './pages/Post';
 
 
 
@@ -49,6 +50,7 @@ function App() {
             {/* for both admin and user */}
             <Route path='post/create' element={ <CreatePost /> } />
             <Route path='/post/edit/:id' element={ <EditPost /> } />
+            <Route path='/post/:id' element={ <Post /> } />
             
           </Routes>
         </Layout>

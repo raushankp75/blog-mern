@@ -137,7 +137,7 @@ const Signup = () => {
                         }}
                       />
                     </div>
-                    <button disabled={loading} type="submit" className="w-full bg-blue-500 text-white p-2 rounded-lg mb-6 hover:bg-white hover:text-black hover:border hover:border-gray-300">{loading ? 'Loading...' : 'Login'}</button>
+                    <button disabled={loading} type="submit" className="w-full bg-blue-500 text-white p-2 rounded-lg mb-6 hover:bg-white hover:text-black hover:border hover:border-gray-300">{loading ? 'Loading...' : 'Signup'}</button>
                     {/* <button type="submit" className="w-full bg-blue-500 text-white p-2 rounded-lg mb-6 hover:bg-white hover:text-black hover:border hover:border-gray-300">Login</button> */}
 
                     <div className="flex gap-2 text-gray-400">
@@ -157,7 +157,7 @@ const Signup = () => {
                       className="absolute hidden bottom-10 right-6 p-6 bg-white bg-opacity-30 backdrop-blur-sm rounded drop-shadow-lg md:block"
                     >
                       <span className="text-orange-800 text-xl"
-                      ><h1 className='text-2xl font-bold text-blue-800'>A blog website</h1>You can create and manage your blog's. Let's Login to continue
+                      ><h1 className='text-xl font-bold text-blue-800'>A blog website</h1>You can create and manage your blog's. Let's Signup to continue
                       </span>
                     </div>
                   </div>
