@@ -140,8 +140,10 @@ const deletePost = async (req, res, next) => {
 const updatePost = async (req, res, next) => {
     try {
         const { post } = req.body;
+
+        console.log(req.body)
         const { title, content } = JSON.parse(post);
-        const image = req.files.image
+        // const image = req.files.image
 
         const currentPost = await Post.findById(req.params.id);
 
@@ -149,27 +151,27 @@ const updatePost = async (req, res, next) => {
         const data = {
             title: title || currentPost.title,
             content: content || currentPost.content,
-            image: image || currentPost.image
+            // image: image || currentPost.image
         }
 
         // MODIFY POST IMAGE CONDITIONALLY
-        if (req.files.image !== '') {
-            const ImgId = currentPost.image.public_id;
-            if (ImgId) {
-                await cloudinary.uploader.destroy(ImgId);
-            }
-            const newImage = await cloudinary.uploder.upload(req.files.image.tempFilePath, {
-                folder: 'posts',
-                width: 1200,
-                crop: 'scale'
-            });
+        // if (req.files.image !== '') {
+        //     const ImgId = currentPost.image.public_id;
+        //     if (ImgId) {
+        //         await cloudinary.uploader.destroy(ImgId);
+        //     }
+        //     const newImage = await cloudinary.uploder.upload(req.files.image.tempFilePath, {
+        //         folder: 'posts',
+        //         width: 1200,
+        //         crop: 'scale'
+        //     });
 
-            // if get the image then set image url to the data object created before
-            data.image = {
-                public_id: newImage.public_id,
-                url: newImage.secure_url
-            }
-        }
+        //     // if get the image then set image url to the data object created before
+        //     data.image = {
+        //         public_id: newImage.public_id,
+        //         url: newImage.secure_url
+        //     }
+        // }
 
         const postUpdate = await Post.findByIdAndUpdate(req.params.id, data, { new: true })
 
@@ -187,10 +189,12 @@ const updatePost = async (req, res, next) => {
 
 
 const addComment = async (req, res, next) => {
-    const { comment } = req.body;
+    const { text } = req.body;
+
+    console.log(req.body, 192)
     try {
         const post = await Post.findByIdAndUpdate(req.params.id, {
-            $push: { comments: { text: comment, postedBy: req.user._id } }
+            $push: { comments: { text, postedBy: req.user._id } }
         },
             { new: true }
         )

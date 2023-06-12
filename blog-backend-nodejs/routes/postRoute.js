@@ -16,7 +16,7 @@ router.get('/posts/view', viewPosts);
 router.get('/post/:id', viewSinglePost);
 router.delete('/delete/post/:id', isAuthenticated, deletePost);
 router.put('/update/post/:id', isAuthenticated, updatePost);
-router.put('/comment/post/:id', isAuthenticated, addComment);
+router.post('/comment/post/:id', isAuthenticated, addComment);
 router.put('/addlike/post/:id', isAuthenticated, addLike);
 router.put('/removelike/post/:id', isAuthenticated, removeLike);
 
