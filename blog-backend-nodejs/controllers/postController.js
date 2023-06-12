@@ -212,48 +212,73 @@ const addComment = async (req, res, next) => {
 
 
 //add like
-const addLike = async (req, res, next) => {
+// const addLike = async (req, res, next) => {
+//     try {
+//         const post = await Post.findByIdAndUpdate(req.params.id, {
+//             $addToSet: { likes: req.user._id }
+//         },
+//             { new: true }
+//         );
+//         const posts = await Post.find().sort({ createdAt: -1 }).populate('postedBy', 'name');
 
-    try {
-        const post = await Post.findByIdAndUpdate(req.params.id, {
-            $addToSet: { likes: req.user._id }
-        },
-            { new: true }
-        );
-        const posts = await Post.find().sort({ createdAt: -1 }).populate('postedBy', 'name');
-        main.io.emit('add-like', posts);
+//         res.status(200).json({
+//             success: true,
+//             post,
+//             posts
+//         })
 
-        res.status(200).json({
-            success: true,
-            post,
-            posts
-        })
+//     } catch (error) {
+//         next(error);
+//     }
+// }
 
-    } catch (error) {
-        next(error);
-    }
+//add like
+const addLike = (req, res) => {
+    Post.findByIdAndUpdate(req.body.post.postId, {
+        $push: { likes: req.user._id }
+    }, {
+        new: true
+    }).exec((err, result) => {
+        if (err) {
+            return res.status(422).json({ error: err })
+        } else {
+            res.json(result)
+        }
+    })
+}
 
+//Remove like
+const removeLike = (req, res) => {
+    Post.findByIdAndUpdate(req.body.post.postId, {
+        $pull: { likes: req.user._id }
+    }, {
+        new: true
+    }).exec((err, result) => {
+        if (err) {
+            return res.status(422).json({ error: err })
+        } else {
+            res.json(result)
+        }
+    })
 }
 
 
+// const removeLike = async (req, res, next) => {
+//     try {
+//         const post = await Post.findByIdAndUpdate(req.params.id, {
+//             $pull: { likes: req.user._id }
+//         },
+//             { new: true }
+//         )
+//         res.status(200).json({
+//             success: true,
+//             post
+//         })
 
-
-const removeLike = async (req, res, next) => {
-    try {
-        const post = await Post.findByIdAndUpdate(req.params.id, {
-            $pull: { likes: req.user._id }
-        },
-            { new: true }
-        )
-        res.status(200).json({
-            success: true,
-            post
-        })
-
-    } catch (error) {
-        next(error);
-    }
-}
+//     } catch (error) {
+//         next(error);
+//     }
+// }
 
 
 module.exports = { createPost, viewPosts, viewSinglePost, deletePost, updatePost, addComment, addLike, removeLike }

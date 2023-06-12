@@ -34,8 +34,8 @@ const Post = () => {
         withCredentials: true,    // IMPORTANT!!!
       })
       setData([response.data.posts]);
-      console.log(response.data.posts)
       setIsLoading(false);
+      console.log(response.data.posts)
     } catch (error) {
       console.log(error)
     }
@@ -66,7 +66,7 @@ const Post = () => {
   }
 
 
-  console.log(Date.now(),35345)
+  console.log(Date.now(), 35345)
 
   // add comment
   const handleComment = async () => {
@@ -95,18 +95,17 @@ const Post = () => {
     }
   }
 
-console.log(data, 92)
+  console.log(data, 92)
 
 
   return (
     <>
       <GoBack />
-      <div className='flex justify-center items-center my-3'>
-
-        {
-          IsLoading ? <Loader /> :
-            data && data?.map((post, index) => {
-              return (
+      {
+        IsLoading ? <Loader /> :
+          data && data?.map((post, index) => {
+            return (
+              <div className='flex justify-center items-center my-3'>
                 <div className='flex flex-col gap-7 w-full md:max-w-[80%] max-w-[99%]' key={index}>
                   <div className='flex flex-col gap-2'>
                     <img src={post?.image?.url} alt="" className='w-full h-96' />
@@ -116,11 +115,11 @@ console.log(data, 92)
 
                   <div className='flex flex-row gap-5 justify-between items-center'>
                     <h2>Created By : {post?.postedBy?.name}</h2>
-                    <span className='text-xs'>{moment(post?.createdAt).format('MMMM DD, YYYY . HH:MM')}</span>
+                    <span className='text-xs'>{moment(post?.createdAt).format('MMMM Do, YYYY . h:mm:ss a')}</span>
                   </div>
 
                   <div className='flex flex-col gap-3'>
-                    <h1 className='text-2xl font-semibold'>Comments</h1>
+                    <h1 className='text-2xl font-semibold'> {post?.comments?.length} Comments</h1>
                     {
                       userInfo ?
                         <>
@@ -146,17 +145,18 @@ console.log(data, 92)
                       post?.comments?.map(comment => {
 
                         return (
-                        <Comments created={comment.created} key={comment._id} name={comment?.postedBy?.name} image={comment?.postedBy?.image} text={comment?.text} />
+                          <Comments created={comment.created} key={comment._id} name={comment?.postedBy?.name} profileImg={comment?.postedBy?.image?.url} text={comment?.text} />
                         )
                       })
                     }
                   </div>
                 </div>
-              )
-            })
-        }
 
-      </div>
+
+              </div>
+            )
+          })
+      }
     </>
   )
 }

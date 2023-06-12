@@ -10,7 +10,9 @@ import { MdEditDocument } from 'react-icons/md'
 import { toast } from 'react-toastify';
 
 // format date
-import format from 'date-fns/format'
+// import format from 'date-fns/format'
+import moment from 'moment';
+
 
 const AdminDashboard = () => {
     const [data, setData] = useState([]);
@@ -128,7 +130,8 @@ const AdminDashboard = () => {
             name: "Created At",
             // selector: (row) => row.createdAt,
             // selector: row => new Date(row.createdAt).toLocaleString(),
-            selector: (row) => format(new Date(row.createdAt), 'MM/dd/yyyy, HH:MM'),
+            // selector: (row) => format(new Date(row.createdAt), 'MM/dd/yyyy, HH:MM'),
+            selector: (row) => {moment(row.createdAt).format('MMMM Do, YYYY . h:mm:ss a')},
             // renderCell: (params) => (
             //     moment(params.row.createdAt).format('YYYY-MM-DD HH:MM:SS')
             // ),

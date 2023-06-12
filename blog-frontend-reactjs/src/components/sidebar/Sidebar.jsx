@@ -30,7 +30,7 @@ const Sidebar = () => {
     dispatch(userLogoutAction());
     e.preventDefault();   // keep link from immediately navigating
     localStorage.clear(); // clear storage
-    navigate("/login");   // now navigate away
+    navigate("/");   // now navigate away
   }
 
 
@@ -60,7 +60,7 @@ const Sidebar = () => {
           </ul>
         </div>
 
-        <Link to='/login' onClick={logout} className='text-white bg-red-400 px-3 py-1 rounded-lg w-fit mx-12 my-10'>Logout</Link>
+        <Link to='/' onClick={logout} className='text-white bg-red-400 px-3 py-1 rounded-lg w-fit mx-12 my-10'>Logout</Link>
       </div>
 
     </div>
