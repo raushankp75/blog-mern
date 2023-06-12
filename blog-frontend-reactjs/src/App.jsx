@@ -36,9 +36,9 @@ function App() {
       <Provider store={store}>
         <Layout>
           <Routes>
-            <Route path='/login' element={<Login />} />
+            <Route path='/' element={<Login />} />
             <Route path='/signup' element={<Signup />} />
-            <Route path='/' element={<PostList />} />
+            <Route path='/postlist' element={<PostList />} />
             <Route path='/about' element={<About />} />
             <Route path='/contact' element={<Contact />} />
             <Route path='/profile' element={ <Profile /> } />

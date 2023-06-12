@@ -29,7 +29,7 @@ const Navbar = () => {
         dispatch(userLogoutAction());
         e.preventDefault();   // keep link from immediately navigating
         localStorage.clear(); // clear storage
-        navigate("/login");   // now navigate away
+        navigate("/");   // now navigate away
     }
 
 
@@ -53,7 +53,7 @@ const Navbar = () => {
             <div className='flex items-center justify-between bg-[#444] md:py-1 py-3 md:px-44 px-6 h-[9vh]'>
                 <div className='cursor-pointer flex items-center 
     text-gray-800'>
-                    {/* <h1 className='uppercase tracking-widest text-3xl font-bold text-gray-200'>Blog</h1> */}
+                    <h1 className='uppercase tracking-widest text-3xl font-bold text-gray-200'>Blog</h1>
                     {/* Nav menus */}
                     <ul className={`md:flex md:items-center md:pb-0 absolute md:static bg-[#444] md:z-auto z-[-1] left-0 w-full md:w-auto md:pl-0 pl-9 transition-all duration-500 ease-in ${open ? 'top-[67px] left-0' : 'left-[-100%] top-[67px]'}`}>
                         {
@@ -78,13 +78,14 @@ const Navbar = () => {
 
                 <div className='flex flex-row items-center'>
                     {/* toggle profile icon open and close */}
-                    {userInfo &&
+                    {/* {userInfo &&
                         <div className='relative md:right-0 right-16 cursor-pointer'>
                             <button onClick={() => setOpenProfile(!openProfile)} className='flex flex-row items-center gap-2 text-gray-200 hover:text-blue-400'>
                                 <img src={user && user?.image?.url} alt="im" className='md:w-12 md:h-12 w-8 h-8 rounded-full bg-white' />
                                 <BsFillCaretDownFill size={25} />
                             </button>
-                            <ul className={` flex flex-col py-4 absolute items-start bg-[#444] left-0  w-[120px] z[-1] transition-all duration-500 ease-in ${openProfile ? 'md:top-16 top-14' : 'top-[-200px]'}`}>
+                            <ul className={` flex flex-col py-4 absolute items-start bg-[#444] left-0  w-[120px] z[-1] transition-all duration-500 ease-in ${openProfile ? 'md:top-16 top-14' : 'top-[-200px]'}`}> */}
+
                                 {/* {
                                     profileData?.map((nav) => (
                                         <li key={nav?.name} className='mx-4 my-0 py-2'>
@@ -93,21 +94,21 @@ const Navbar = () => {
                                     ))
                                 } */}
 
-                                <Link to='/profile' className='text-gray-200 hover:text-gray-400 duration-500 py-2 mx-4 my-0'>View Profile</Link>
+                                {/* <Link to='/profile' className='text-gray-200 hover:text-gray-400 duration-500 py-2 mx-4 my-0'>View Profile</Link>
                                 <Link className='uppercase text-blue-500 font-extrabold hover:text-gray-400 duration-500 py-2 mx-4 my-0 tracking-widest'>{user?.role}</Link>
-                                {userInfo &&
-                                    <Link to="/login" onClick={logout} className='text-white bg-red-400 px-2 py-1 my-2  rounded-md w-fit ml-4'>Logout</Link>
-                                }
                             </ul>
                         </div>
-                    }
+                    } */}
 
+                    {userInfo &&
+                        <Link to="/" onClick={logout} className='text-white bg-red-400 px-2 py-1 my-2  rounded-md w-fit ml-4'>Logout</Link>
+                    }
 
 
                     {/* login and signup */}
                     {!userInfo &&
                         <div className='mx-14'>
-                            <Link to="/login" className='text-white bg-blue-600 px-6 py-1 font-semibold  rounded-md w-fit ml-4'>Login</Link>
+                            <Link to="/" className='text-white bg-blue-600 px-6 py-1 font-semibold  rounded-md w-fit ml-4'>Login</Link>
                             <Link to="/signup" className='text-white bg-green-600 px-6 py-1 font-semibold  rounded-md w-fit ml-4'>Signup</Link>
                         </div>
                     }

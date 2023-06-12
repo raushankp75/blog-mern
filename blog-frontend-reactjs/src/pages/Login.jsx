@@ -30,7 +30,7 @@ const Login = () => {
   const dispatch = useDispatch();
 
   // authenticated
-  const {loading, isAuthenticated, userInfo } = useSelector(state => state.login);
+  const {isAuthenticated, userInfo } = useSelector(state => state.login);
 
   console.log(isAuthenticated, userInfo)
 
@@ -40,7 +40,7 @@ const Login = () => {
       if (userInfo.role == 'admin') {
         navigate('/admin/dashboard');
       } else {
-        navigate('/');
+        navigate('/postlist');
       }
     }
   }, [isAuthenticated])
@@ -91,8 +91,8 @@ const Login = () => {
                       />
                     </div>
                     <small className='w-full pb-4'><ErrorMessage name='password' /></small>
-                    <button disabled={loading} type="submit" className="w-full bg-blue-500 text-white p-2 rounded-lg mb-6 hover:bg-white hover:text-black hover:border hover:border-gray-300">{loading ? 'Loading...' : 'Login'}</button>
-                    {/* <button type="submit" className="w-full bg-blue-500 text-white p-2 rounded-lg mb-6 hover:bg-white hover:text-black hover:border hover:border-gray-300">Login</button> */}
+                    {/* <button disabled={loading} type="submit" className="w-full bg-blue-500 text-white p-2 rounded-lg mb-6 hover:bg-white hover:text-black hover:border hover:border-gray-300">{loading ? 'Loading...' : 'Login'}</button> */}
+                    <button type="submit" className="w-full bg-blue-500 text-white p-2 rounded-lg mb-6 hover:bg-white hover:text-black hover:border hover:border-gray-300">Login</button>
 
                     <div className="flex gap-2 text-gray-400">
                       <p className=''>Dont'have an account?</p>

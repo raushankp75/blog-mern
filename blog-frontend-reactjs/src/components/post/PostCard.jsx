@@ -121,7 +121,7 @@ const PostCard = () => {
                             </Link>
 
                             <div>
-                                <p className='text-sm' dangerouslySetInnerHTML={{ __html: post?.content.split(" ").slice(0, 6).join(" ") + "..." }}></p>
+                                <p className='text-sm' dangerouslySetInnerHTML={{ __html: post?.content.split(" ").slice(0, 15).join(" ") + "..." }}></p>
                             </div>
 
                             <hr />

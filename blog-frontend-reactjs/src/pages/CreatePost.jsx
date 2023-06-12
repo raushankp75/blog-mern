@@ -39,7 +39,7 @@ const CreatePost = () => {
   // console.log(pic)
 
 
-  const { isAuthenticated } = useSelector(state => state.login);
+  const { isAuthenticated, userInfo } = useSelector(state => state.login);
 
   console.log(isAuthenticated, 25)
 
@@ -56,7 +56,10 @@ const CreatePost = () => {
       });
       if (data.success === true) {
         toast.success('post created');
-        navigate('/admin/dashboard')
+        if(userInfo.role === 'admin'){
+          navigate('/admin/dashboard')
+        }
+        navigate('/postlist')
       }
     } catch (error) {
       console.log(error);

@@ -9,10 +9,6 @@ const SidebarData = [
             name: "Create Post",
             link: "post/create"
         },
-        {
-            name: "Profile",
-            link: "/profile"
-        }
     ]
 
 export default SidebarData

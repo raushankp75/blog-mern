@@ -1,32 +1,18 @@
-import React, { useState, useEffect } from 'react';
-import { Formik, Field, Form, ErrorMessage } from 'formik';
-import * as yup from 'yup';
-import { toast } from 'react-toastify';
-import { useNavigate, useParams } from 'react-router-dom'
-import { useSelector } from 'react-redux';
+import React, { useState, useEffect } from 'react'
+import { Formik, Field, Form } from 'formik';
+import axios from 'axios';
+import { useParams } from 'react-router-dom';
+// import api from '../../utils/ApiServices';
+import { parseISO, format } from 'date-fns'
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
+
 
 // import react quill
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 import { modules } from '../components/moduleToolbar';
-import axios from 'axios';
-import GoBack from '../components/goBack';
-
-
-
-
-// validation
-const validationSchema = yup.object({
-    title: yup
-        .string('Add a post title')
-        .min(4, 'Post title should have minimum of 4 characters ')
-        .required('Post title is required'),
-    content: yup
-        .string('Add text content')
-        .min(10, 'Text content should have minimum of 10 characters ')
-        .required('Text content is required'),
-});
-
 
 
 
@@ -34,116 +20,126 @@ const EditPost = () => {
 
     const { id } = useParams();
 
-    const [data, setData] = useState(null);
-
-    const navigate = useNavigate();
-
     const [pic, sePic] = useState("")
 
-    console.log(pic)
+    const [initialValues, setInitialValues] = useState(null);
 
 
-    const { isAuthenticated } = useSelector(state => state.login);
+    // const [doc1, setDoc1] = useState("")
+    // const [doc2, setDoc2] = useState("")
+    // const [doc3, setDoc3] = useState("")
 
-    console.log(isAuthenticated, 25)
-
-
-
-    // view single post by id
-    const getPost = async () => {
-        try {
-            const response = await axios.get(`http://localhost:8000/api/post/${id}`, {
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                withCredentials: true,    // IMPORTANT!!!
-            })
-            const updatedData = {
-                ...response.data.posts
-            };
-            setData(updatedData);
-            console.log(response.data.posts)
-        } catch (error) {
-            console.log(error)
-        }
-    };
 
     useEffect(() => {
-        getPost();
+        axios.get(`http://localhost:8000/api/post/${id}`, {
+            headers: {
+                "content-Type": "application/json"
+            },
+            withCredentials: true,
+        })
+            .then((response) => {
+                // console.log(res.data.tender, 29)
+                // console.log(...res.data.tender)
+
+
+                // const formattedData = {
+                //   ...res.data.tender,
+                //   startDate: format(new Date(res.data.tender.startDate), 'yyyy-MM-dd'),
+                //   endDate: format(new Date(res.data.tender.endDate), 'yyyy-MM-dd'),
+                //   prebidMeetingDate: format(new Date(res.data.tender.prebidMeetingDate), 'yyyy-MM-dd'),
+                // };
+                const title = response.data.posts.title
+                const content = response.data.posts.content
+
+                const updatedData = {
+                    title, content
+                    // response.data.posts.title , response.data.posts.content 
+                };
+                // console.log(formattedData, 38)
+                setInitialValues(updatedData);
+                // setInitialValues(formattedData);
+            })
+            .catch((err) => {
+                console.log(err)
+                console.log("error, 18")
+            })
+
     }, [])
 
+    const handleSubmit = async (vals) => {
+        // e.preventDefault();
+        await axios.put(`http://localhost:8000/api/update/post/${id}`, vals, {
+            headers: {
+                'content-Type': 'multipart/form-data'
+            },
+            withCredentials: true,
+        })
+            .then(res => {
+                // if (res.data.success) {
+                toast(res.data.message)
+                // }
 
-
-
-
-
-
-
-    // update single post by id
-    const updatePost = async (values) => {
-        try {
-            const { data } = await axios.put(`http://localhost:8000/api/update/post/${id}`, values, {
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                withCredentials: true,    // IMPORTANT!!!
-            });
-            if (data.success === true) {
-                toast.success('post updated');
-                navigate('/admin/dashboard')
-            }
-        } catch (error) {
-            console.log(error);
-            toast.error(error.response.data.error);
-        }
+            }).catch(err => {
+                console.log(err);
+            })
     }
 
 
+    if (!initialValues) {
+        return <div>Loading...</div>;
+    }
 
-
-
-
-    
 
     return (
         <div>
             <Formik
-                initialValues={data}
+                // enableReinitialize // missing piece!!
+                initialValues={initialValues}
 
-                validationSchema={validationSchema}
-                onSubmit={async (values, actions) => {
+                onSubmit={async (values) => {
                     await new Promise((r) => setTimeout(r, 500));
-                    // alert(JSON.stringify(values, null, 2))
+
+                    // let vals = new FormData()
+                    // vals.append("post", JSON.stringify(values))
                     let vals = new FormData()
                     vals.append("post", JSON.stringify(values))
                     vals.append("image", pic)
 
-                    updatePost(values);
-                    // actions.resetForm();
+
+                    handleSubmit(vals)
+
+
                 }}
             >
 
+                {({ values, setFieldValue, handleChange }) => (
 
+                    <Form className="w-full max-w-6xl border-2 border-slate-300 p-8 rounded-md">
+                        <div>
+                            <h1 className="font-semibold text-2xl border-b-2 border-b-orange-400 rounded-sm w-fit mb-5 tracking-widest">Update Post</h1>
+                            <div>
 
-                {
-                    ({ values, setFieldValue }) => (
-                        <Form>
-                            <GoBack />
-                            <div className="flex flex-col justify-center md:max-w-3xl mx-auto">
-                                <span className="mb-3 text-4xl font-bold">Update</span>
-                                <div className="py-4">
-                                    <span className="mb-2 text-md">Title</span>
+                                <div className="w-full">
+                                    <label className="block uppercase tracking-wide text-gray-700 font-bold mb-2" for="state">
+                                        Title
+                                    </label>
                                     <Field
                                         name="title"
                                         id="title"
                                         type="text"
-                                        className="w-full p-2 border border-gray-300 rounded-md placeholder:font-light placeholder:text-gray-500"
+                                        onChange={handleChange}
+                                        placeholder=""
+                                        className="appearance-none block w-full text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
                                     />
-                                </div>
-                                <small className='w-full pb-4'><ErrorMessage name='title' /></small>
 
-                                {/* for content writting */}
-                                <div className="py-4">
+                                </div>
+
+
+                                <div className="w-full">
+                                    <label className="block uppercase tracking-wide text-gray-700 font-bold mb-2" for="state">
+                                        Content
+                                    </label>
+                                    {/* for content writting */}
                                     <ReactQuill
                                         theme='snow'
                                         placeholder={'Write the post content'}
@@ -152,8 +148,6 @@ const EditPost = () => {
                                         onChange={(e) => setFieldValue('content', e)}
                                     />
                                 </div>
-                                {/* <small className='w-full pb-4'><ErrorMessage name='content' /></small> */}
-
 
                                 <div className="py-4">
                                     <input
@@ -166,12 +160,23 @@ const EditPost = () => {
                                     />
                                 </div>
 
-                                <button type="submit" className="w-fit bg-blue-500 text-white px-5 py-2 rounded-lg hover:bg-gray-200 hover:text-black hover:border hover:border-gray-300">Update Post</button>
                             </div>
-                        </Form>
-                    )
-                }
+                        </div>
+
+                        <div className='flex justify-center'>
+                            <button type="submit" className='px-16 py-2 bg-blue-500 text-white font-semibold rounded-md'>Submit</button>
+                        </div>
+
+
+
+
+                    </Form>
+
+
+                )}
+
             </Formik>
+
         </div>
     )
 }

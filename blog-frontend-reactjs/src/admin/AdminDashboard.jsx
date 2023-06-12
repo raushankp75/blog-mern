@@ -86,19 +86,27 @@ const AdminDashboard = () => {
         {
             name: "Posted By",
             selector: (row) => row?.postedBy?.name,
-            sortable: true
+            sortable: true,
+            minWidth: "130px",
+            maxWidth: "130px"
         },
         {
             name: "Title",
             selector: (row) => row?.title,
+            minWidth: "180px",
+            maxWidth: "180px"
         },
         {
             name: "Content",
             selector: (row) => <div dangerouslySetInnerHTML={{ __html: row?.content }}></div>,
+            minWidth: "300px",
+            maxWidth: "300px"
         },
         {
             name: "Image",
             selector: (row) => <img width={50} height={50} src={row?.image?.url} />,
+            minWidth: "100px",
+            maxWidth: "100px"
         },
         // {
         //     name: "User Pic",
@@ -107,10 +115,14 @@ const AdminDashboard = () => {
         {
             name: "Likes",
             selector: (row) => row?.likes.length,
+            minWidth: "60px",
+            maxWidth: "60px"
         },
         {
             name: "Comments",
             selector: (row) => row?.comments.length,
+            minWidth: "100px",
+            maxWidth: "100px"
         },
         {
             name: "Created At",
@@ -122,7 +134,8 @@ const AdminDashboard = () => {
             // ),
 
             sortable: true,
-            minWidth: "180px"
+            minWidth: "150px",
+            maxWidth: "150px"
         },
         // {
         //     name: "Time",
@@ -139,19 +152,21 @@ const AdminDashboard = () => {
 
             width: 100,
             cell: (row) => (
-                <div className='flex justify-between w-[170px]'>
+                <div className='flex justify-between w-[170px] text-2xl'>
                     <Link to={`/post/edit/${row?._id}`}>
                         <button>
-                            <MdEditDocument />
+                            <MdEditDocument className='text-blue-500' />
                             {/* Edit */}
                         </button>
                     </Link>
                     <button onClick={(e) => deletePostById(e, row?._id)}>
-                        <AiFillDelete />
+                        <AiFillDelete className='text-red-500' />
                     </button>
 
                 </div>
-            )
+            ),
+            minWidth: "120px",
+            maxWidth: "120px"
         },
     ]
 
