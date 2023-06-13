@@ -6,8 +6,20 @@ const SidebarData = [
             link: "/admin/dashboard"
         },
         {
+            name: "All Post",
+            link: "allpostlist"
+        },
+        {
             name: "Create Post",
             link: "post/create"
+        },
+        {
+            name: "All User",
+            link: "alluserlist"
+        },
+        {
+            name: "profile",
+            link: "/profile"
         },
     ]
 

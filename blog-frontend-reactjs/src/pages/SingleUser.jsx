@@ -10,7 +10,7 @@ import format from 'date-fns/format'
 import { useParams } from 'react-router-dom';
 
 
-const Profile = () => {
+const SingleUser = () => {
     // const dispatch = useDispatch();
 
     // // get user data
@@ -31,7 +31,7 @@ const Profile = () => {
 
     const getProfile = async () => {
         try {
-            const response = await axios.get(`http://localhost:8000/api/profile`, {
+            const response = await axios.get(`http://localhost:8000/api/singleuser/${id}`, {
                 headers: {
                     'Content-Type': 'multipart/form-data'
                 },
@@ -61,14 +61,14 @@ const Profile = () => {
 
 
             {
-                data?.map((profile, index) => {
+                data?.map((user, index) => {
                     return (
                         <div key={index}>
-                            <img src={ profile?.image?.url } width={100} alt="" />
-                            <p>Name: { profile?.name}</p>
-                            <p>Email: { profile?.email}</p>
-                            <p>Role: { profile?.role}</p>
-                            <p>Created At: {format(new Date(profile?.createdAt), 'MM/dd/yyyy, HH:MM')}</p>
+                            <img src={ user?.image?.url } width={100} alt="" />
+                            <p>Name: { user?.name}</p>
+                            <p>Email: { user?.email}</p>
+                            <p>Role: { user?.role}</p>
+                            <p>Created At: {format(new Date(user?.createdAt), 'MM/dd/yyyy, HH:MM')}</p>
                         </div>
                     )
                 })
@@ -77,4 +77,4 @@ const Profile = () => {
     )
 }
 
-export default Profile
+export default SingleUser

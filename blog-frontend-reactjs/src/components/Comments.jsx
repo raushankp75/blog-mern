@@ -1,6 +1,6 @@
 import React from 'react'
-import timeSince from './timeSince'
-import moment from 'moment'
+
+// import moment from 'moment'
 import ReactTimeAgo from 'react-time-ago'
 
 const Comments = ({ name, text, created, profileImg }) => {

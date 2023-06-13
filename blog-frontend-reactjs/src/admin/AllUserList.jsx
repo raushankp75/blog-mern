@@ -15,7 +15,7 @@ import format from 'date-fns/format'
 import moment from 'moment';
 
 
-const AdminDashboard = () => {
+const AllUserList = () => {
     const [data, setData] = useState([]);
 
     const [search, setSearch] = useState("");
@@ -25,15 +25,15 @@ const AdminDashboard = () => {
     // view post list
     const getPost = async () => {
         try {
-            const response = await axios.get('http://localhost:8000/api/posts/view', {
+            const response = await axios.get('http://localhost:8000/api/allusers', {
                 headers: {
                     'Content-Type': 'application/json'
                 },
                 withCredentials: true,    // IMPORTANT!!!
             })
-            setData(response.data.posts);
-            setFilteredName(response.data.posts);
-            console.log(response.data.posts)
+            setData(response.data.users);
+            setFilteredName(response.data.users);
+            console.log(response.data.users)
         } catch (error) {
             console.log(error)
         }
@@ -59,51 +59,19 @@ const AdminDashboard = () => {
 
 
 
-
-    // delete post by ID
-    const deletePostById = async (e, id) => {
-        // console.log(id)
-        if (window.confirm("Are you sure you want to delete this post?")) {
-            try {
-                const { data } = await axios.delete(`http://localhost:8000/api/delete/post/${id}`, {
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    withCredentials: true,    // IMPORTANT!!!
-                })
-                if (data.success === true) {
-                    toast.success(data.message);
-                    getPost();
-                }
-            } catch (error) {
-                console.log(error);
-                toast.error(error);
-            }
-        }
-    }
-
-
-
-
     const columns = [
         {
-            name: "Posted By",
-            selector: (row) => row?.postedBy?.name,
+            name: "Name",
+            selector: (row) => row?.name,
             sortable: true,
             minWidth: "130px",
             maxWidth: "130px"
         },
         {
-            name: "Title",
-            selector: (row) => row?.title,
+            name: "Email",
+            selector: (row) => row?.email,
             minWidth: "180px",
             maxWidth: "180px"
-        },
-        {
-            name: "Content",
-            selector: (row) => <div dangerouslySetInnerHTML={{ __html: row?.content }}></div>,
-            minWidth: "300px",
-            maxWidth: "300px"
         },
         {
             name: "Image",
@@ -111,28 +79,18 @@ const AdminDashboard = () => {
             minWidth: "100px",
             maxWidth: "100px"
         },
-        // {
-        //     name: "User Pic",
-        //     selector: (row) => <img width={50} height={50} src={row?.userPic?.profilePic?.url} />,
-        // },
         {
-            name: "Likes",
-            selector: (row) => row?.likes.length,
+            name: "Role",
+            selector: (row) => row?.role,
             minWidth: "60px",
             maxWidth: "60px"
-        },
-        {
-            name: "Comments",
-            selector: (row) => row?.comments.length,
-            minWidth: "100px",
-            maxWidth: "100px"
         },
         {
             name: "Created At",
             // selector: (row) => row.createdAt,
             // selector: row => new Date(row.createdAt).toLocaleString(),
-            selector: (row) => format(new Date(row.createdAt), 'MM/dd/yyyy, HH:MM'),
-            // selector: (row) => {moment(row.createdAt).format('MMMM Do, YYYY . h:mm:ss a')},
+            // selector: (row) => format(new Date(row.createdAt), 'MM/dd/yyyy, HH:MM'),
+            selector: (row) => moment(row.createdAt).format('MMMM Do YYYY . h:mm:ss a'),
             // renderCell: (params) => (
             //     moment(params.row.createdAt).format('YYYY-MM-DD HH:MM:SS')
             // ),
@@ -141,10 +99,6 @@ const AdminDashboard = () => {
             minWidth: "150px",
             maxWidth: "150px"
         },
-        // {
-        //     name: "Time",
-        //     selector: (row) => format(new Date(row.createdAt), 'HH:MM'),
-        // },
         {
             name: "Action",
             // cell: row =>
@@ -157,22 +111,12 @@ const AdminDashboard = () => {
             width: 100,
             cell: (row) => (
                 <div className='flex justify-between w-[180px] text-2xl'>
-                    <Link to={`/post/${row?._id}`}>
+                    <Link to={`/singleuser/${row?._id}`}>
                         <button className='text-green-500'>
                             <GrView className='text-green-500' />
                             {/* Edit */}
                         </button>
                     </Link>
-                    <Link to={`/post/edit/${row?._id}`}>
-                        <button>
-                            <MdEditDocument className='text-blue-500' />
-                            {/* Edit */}
-                        </button>
-                    </Link>
-                    <button onClick={(e) => deletePostById(e, row?._id)}>
-                        <AiFillDelete className='text-red-500' />
-                    </button>
-
                 </div>
             ),
             minWidth: "170px",
@@ -230,4 +174,4 @@ const AdminDashboard = () => {
     )
 }
 
-export default AdminDashboard
+export default AllUserList

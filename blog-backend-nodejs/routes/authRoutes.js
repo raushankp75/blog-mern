@@ -3,7 +3,7 @@ const router = express.Router();
 
 
 // import controller
-const { signup, login, logout, userProfile } = require('../controllers/authController');
+const { signup, login, logout, userProfile, AllUsers, singleUser } = require('../controllers/authController');
 
 
 // import authentication middleware
@@ -14,7 +14,9 @@ const { isAuthenticated } = require('../middleware/auth');
 router.post('/signup', signup);
 router.post('/login', login);
 router.get('/logout', logout);
-router.get('/me', isAuthenticated, userProfile);
+router.get('/profile', isAuthenticated, userProfile);
+router.get('/singleuser/:id', isAuthenticated, singleUser);
+router.get('/allusers', isAuthenticated, AllUsers);
 
 
 

@@ -24,6 +24,9 @@ import AdminRoute from './components/AdminRoute';
 import Signup from './pages/Signup';
 import Profile from './pages/profile';
 import Post from './pages/Post';
+import AllPostList from './admin/AllPostList';
+import AllUserList from './admin/AllUserList';
+import SingleUser from './pages/SingleUser';
 
 
 
@@ -46,6 +49,9 @@ function App() {
 
             {/* admin */}
             <Route path='/admin/dashboard' element={ <AdminRoute><AdminDashboard /></AdminRoute> } />
+            <Route path='allpostlist' element={ <AdminRoute><AllPostList /></AdminRoute> } />
+            <Route path='alluserlist' element={ <AdminRoute><AllUserList /></AdminRoute> } />
+            <Route path='/singleuser/:id' element={ <AdminRoute><SingleUser /></AdminRoute> } />
 
             {/* for both admin and user */}
             <Route path='post/create' element={ <CreatePost /> } />

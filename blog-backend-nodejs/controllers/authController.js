@@ -69,7 +69,7 @@ const login = async (req, res, next) => {
         }
         // check password
         const isMatched = await user.comparePassword(password);
-        if(!isMatched) {
+        if (!isMatched) {
             return next(new ErrorResponse("Invalid credentials", 400));
         }
 
@@ -84,12 +84,12 @@ const login = async (req, res, next) => {
 const sendTokenResponse = async (user, codeStatus, res) => {
     const token = await user.getJwtToken();
     res.status(codeStatus).cookie('token', token, { maxAge: 60 * 60 * 1000, httpOnly: true })
-    .json({
-        success: true,
-        id: user._id,
-        role: user.role
-    })
-} 
+        .json({
+            success: true,
+            id: user._id,
+            role: user.role
+        })
+}
 
 
 
@@ -111,4 +111,33 @@ const userProfile = async (req, res, next) => {
     })
 }
 
-module.exports = { signup, login, logout, userProfile };
+
+const singleUser = async (req, res, next) => {
+    try {
+        const user = await User.findById(req.params.id).select('-password');
+        res.status(200).json({
+            success: true,
+            user
+        })
+    } catch (error) {
+        next(error);
+    }
+}
+
+
+
+
+const AllUsers = async (req, res, next) => {
+    try {
+        const users = await User.find().sort({ createdAt: -1 }).select('-password');
+        res.status(200).json({
+            success: true,
+            users
+        })
+    } catch (error) {
+        next(error);
+    }
+}
+
+
+module.exports = { signup, login, logout, userProfile, singleUser, AllUsers };
