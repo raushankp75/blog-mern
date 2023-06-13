@@ -38,7 +38,7 @@ const Login = () => {
   useEffect(() => {
     if (isAuthenticated) {
       if (userInfo.role == 'admin') {
-        navigate('/admin/dashboard');
+        navigate('/allpostlist');
       } else {
         navigate('/postlist');
       }

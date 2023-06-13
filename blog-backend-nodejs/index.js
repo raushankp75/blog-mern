@@ -26,6 +26,7 @@ require('./database/db');
 // IMPORT ROUTES
 const authRoutes = require('./routes/authRoutes');
 const postRoute = require('./routes/postRoute');
+const commonRoute = require('./routes/commonRoute');
 
 
 // MIDDLEWARE
@@ -44,6 +45,7 @@ app.use(cookieParser());
 // END POINT ROUTES - ROUTES MIDDLEWARE
 app.use('/api', authRoutes)
 app.use('/api', postRoute)
+app.use('/api', commonRoute)
 
 
 
