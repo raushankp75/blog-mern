@@ -4,10 +4,11 @@ const ErrorResponse = require('../utils/errorResponse');
 
 
 const dataCount = async (req, res, next) => {
+    const { likes, text } = req.body;
     try {
         const countData = [];
         const postData = await Post.find().count();
-        const userData = await User.find({ role: req.user.role }).count();
+        const userData = await User.find({ role: "user" }).count();
 
         countData.push({
             post: postData,
@@ -26,17 +27,3 @@ const dataCount = async (req, res, next) => {
 
 
 module.exports = { dataCount }
-
-
-
-// const viewPosts = async (req, res, next) => {
-//     try {
-//         const posts = await Post.find().sort({ createdAt: -1 }).populate('postedBy', 'name image');
-//         res.status(200).json({
-//             success: true,
-//             posts
-//         })
-//     } catch (error) {
-//         next(error);
-//     }
-// }
