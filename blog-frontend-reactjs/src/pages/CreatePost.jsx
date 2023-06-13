@@ -11,6 +11,7 @@ import 'react-quill/dist/quill.snow.css';
 import { modules } from '../components/moduleToolbar';
 import axios from 'axios';
 import GoBack from '../components/goBack';
+import PreviewImage from '../components/PreviewImage';
 
 
 
@@ -134,6 +135,8 @@ const CreatePost = () => {
                     }}
                   />
                 </div>
+                
+                <PreviewImage />
 
                 <button type="submit" className="w-fit bg-blue-500 text-white px-5 py-2 rounded-lg hover:bg-gray-200 hover:text-black hover:border hover:border-gray-300">Create Post</button>
               </div>

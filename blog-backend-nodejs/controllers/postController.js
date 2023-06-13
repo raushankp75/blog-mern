@@ -143,43 +143,60 @@ const updatePost = async (req, res, next) => {
 
         console.log(req.body)
         const { title, content } = JSON.parse(post);
-        // const image = req.files.image
+        const image = req.files.image
 
         const currentPost = await Post.findById(req.params.id);
 
-        // BUILD THE OBJECT DATA
+      
+
+        // MODIFY POST IMAGE CONDITIONALLY
+        try {
+            // UPLOAD IMAGE IN CLOUDINARY
+            const result = await cloudinary.uploader.upload(image.tempFilePath, {
+                folder: 'posts',
+                width: 1200,
+                crop: 'scale'
+            })
+
+              // BUILD THE OBJECT DATA
         const data = {
             title: title || currentPost.title,
             content: content || currentPost.content,
-            // image: image || currentPost.image
+            image: {
+                public_id: result.public_id,
+                url: result.secure_url
+            }  || currentPost.image
         }
 
-        // MODIFY POST IMAGE CONDITIONALLY
-        // if (req.files.image !== '') {
-        //     const ImgId = currentPost.image.public_id;
-        //     if (ImgId) {
-        //         await cloudinary.uploader.destroy(ImgId);
-        //     }
-        //     const newImage = await cloudinary.uploder.upload(req.files.image.tempFilePath, {
-        //         folder: 'posts',
-        //         width: 1200,
-        //         crop: 'scale'
-        //     });
+            const postUpdate = await Post.findByIdAndUpdate(req.params.id, data, { new: true })
 
-        //     // if get the image then set image url to the data object created before
-        //     data.image = {
-        //         public_id: newImage.public_id,
-        //         url: newImage.secure_url
-        //     }
-        // }
+            res.status(200).json({
+                success: true,
+                postUpdate
+            })
+    
+            // const post = await Post.create({
+            //     title,
+            //     content,
+            //     postedBy: req.user._id,
+            //     image: {
+            //         public_id: result.public_id,
+            //         url: result.secure_url
+            //     }
+            // })
+            // res.status(200).json({
+            //     success: true,
+            //     post
+            // })
+    
+        } catch (error) {
+            console.log(error);
+            next(error);
+        }
 
-        const postUpdate = await Post.findByIdAndUpdate(req.params.id, data, { new: true })
+      
 
-        res.status(200).json({
-            success: true,
-            postUpdate
-        })
-
+       
     } catch (error) {
         console.log(error);
         next(error);
@@ -233,8 +250,38 @@ const addComment = async (req, res, next) => {
 // }
 
 //add like
-const addLike = (req, res) => {
-    Post.findByIdAndUpdate(req.body.post.postId, {
+const addLike = async(req, res) => {
+
+    console.log("scfds")
+
+    const postid = req.params.id
+
+    console.log(postid, "scfds")
+
+const PostData = await Post.findById(postid)
+
+console.log(PostData, 246)
+
+console.log(PostData.likes)
+
+console.log(req.user._id.toString())
+
+console.log(PostData.likes.includes(req.user._id.toString()))
+
+if(PostData.likes.includes(req.user._id.toString())){
+    Post.findByIdAndUpdate(postid, {
+        $pull: { likes: req.user._id }
+    }, {
+        new: true
+    }).exec((err, result) => {
+        if (err) {
+            return res.status(422).json({ error: err })
+        } else {
+            res.json(result)
+        }
+    })
+} else {
+    Post.findByIdAndUpdate(postid, {
         $push: { likes: req.user._id }
     }, {
         new: true
@@ -246,21 +293,22 @@ const addLike = (req, res) => {
         }
     })
 }
+}
 
 //Remove like
-const removeLike = (req, res) => {
-    Post.findByIdAndUpdate(req.body.post.postId, {
-        $pull: { likes: req.user._id }
-    }, {
-        new: true
-    }).exec((err, result) => {
-        if (err) {
-            return res.status(422).json({ error: err })
-        } else {
-            res.json(result)
-        }
-    })
-}
+// const removeLike = (req, res) => {
+//     Post.findByIdAndUpdate(req.body.post.postId, {
+//         $pull: { likes: req.user._id }
+//     }, {
+//         new: true
+//     }).exec((err, result) => {
+//         if (err) {
+//             return res.status(422).json({ error: err })
+//         } else {
+//             res.json(result)
+//         }
+//     })
+// }
 
 
 // const removeLike = async (req, res, next) => {
@@ -281,4 +329,4 @@ const removeLike = (req, res) => {
 // }
 
 
-module.exports = { createPost, viewPosts, viewSinglePost, deletePost, updatePost, addComment, addLike, removeLike }
+module.exports = { createPost, viewPosts, viewSinglePost, deletePost, updatePost, addComment, addLike }

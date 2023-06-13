@@ -119,7 +119,8 @@ const Post = () => {
                   </div>
 
                   <div className='flex flex-col gap-3'>
-                    <h1 className='text-2xl font-semibold'> {post?.comments?.length} Comments</h1>
+                    <h1 className='text-2xl font-semibold'>Comments</h1>
+                    {/* {post?.comments?.length} */}
                     {
                       userInfo ?
                         <>

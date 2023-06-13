@@ -102,34 +102,36 @@ const PostCard = () => {
 
 
     const likePost = (id) => {
-        axios.put(`http://localhost:8000/api/addlike/post/${id}`, {
+
+        console.log(id, 20)
+        axios.post(`http://localhost:8000/api/addlike/post/${id}`, {}, {
             headers: {
                 'Content-Type': 'application/json'
             },
             withCredentials: true,    // IMPORTANT!!!
-            body: JSON.stringify({
-                postId: id
-            })
-        }).then(res=>res.json())
+            // body: JSON.stringify({
+            //     postId: id
+            // })
+        }).then(res=>console.log(res))
         .then((result) => {
             console.log(result)
         })
     }
 
-    const unlikePost = (id) => {
-        axios.put(`http://localhost:8000/api/removelike/post/${id}`, {
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            withCredentials: true,    // IMPORTANT!!!
-            body: JSON.stringify({
-                postId: id
-            })
-        }).then(res=>res.json())
-        .then((result) => {
-            console.log(result)
-        })
-    }
+    // const unlikePost = (id) => {
+    //     axios.put(`http://localhost:8000/api/removelike/post/${id}`, {
+    //         headers: {
+    //             'Content-Type': 'application/json'
+    //         },
+    //         withCredentials: true,    // IMPORTANT!!!
+    //         body: JSON.stringify({
+    //             postId: id
+    //         })
+    //     }).then(res=>res.json())
+    //     .then((result) => {
+    //         console.log(result)
+    //     })
+    // }
 
 
 
@@ -170,7 +172,8 @@ const PostCard = () => {
 
                                 <div className='flex flex-row justify-between'>
                                     <div className='flex flex-row gap-2 items-center'>
-                                         <FcLikePlaceholder onClick={() => {likePost(post._id)}} size={30} className='cursor-pointer' /> <FcLike onClick={() => {unlikePost(post._id)}} size={30} className='cursor-pointer' />
+                                         <FcLikePlaceholder onClick={() => {likePost(post._id)}} size={30} className='cursor-pointer' />
+                                          {/* <FcLike onClick={() => {unlikePost(post._id)}} size={30} className='cursor-pointer' /> */}
                                         <span className='font-semibold'>{post?.likes?.length} Likes</span>
 
 
