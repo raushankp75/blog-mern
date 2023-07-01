@@ -1,7 +1,7 @@
 import React from 'react'
 import Navbar from '../components/navbar/Navbar'
 import Footer from '../components/footer/Footer'
-import Sidebar from '../components/Sidebar/Sidebar'
+import Sidebar from '../components/sidebar/Sidebar'
 import { useSelector } from 'react-redux'
 
 
