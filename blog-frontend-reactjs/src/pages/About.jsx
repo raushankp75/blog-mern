@@ -1,11 +1,11 @@
 import React from 'react'
-import GoBack from '../components/goBack'
+// import GoBack from '../components/goBack'
 
 const About = () => {
   // https://drive.google.com/uc?export=view&id=1H3UdTp3tuZyN0MyT12qZx8w_wGco6iDF
   return (
     <>
-      <GoBack />
+      {/* <GoBack /> */}
       <div className='w-full h-auto flex justify-between items-center'>
         <div className="about-left">
           <img src="https://drive.google.com/uc?export=view&id=1H3UdTp3tuZyN0MyT12qZx8w_wGco6iDF" alt="me" className='w-[380px] h-[80vh] transform' />
