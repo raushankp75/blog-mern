@@ -1,7 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { useDispatch } from 'react-redux'
-import { useSelector } from 'react-redux';
-import { userProfileAction } from '../redux/actions/userAction';
+
 import axios from 'axios';
 
 

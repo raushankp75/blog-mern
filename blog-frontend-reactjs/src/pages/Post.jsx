@@ -86,7 +86,11 @@ const Post = () => {
       if (data.success === true) {
         setAddComment('');
         toast.success("comment added");
-        getPost();
+        // getPost();
+      data.comments.push(data.comment)
+      console.log(data.comment, 91)
+      // setData((prev)=> [...prev, prev.comments:""])
+
       }
       console.log(data.post)
     } catch (error) {
@@ -94,6 +98,8 @@ const Post = () => {
       toast.error(error);
     }
   }
+
+  console.log(data.comments, 55)
 
   console.log(data, 92)
 

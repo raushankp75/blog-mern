@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { FcLikePlaceholder, FcLike } from 'react-icons/fc'
+import { FcLike, FcLikePlaceholder } from 'react-icons/fc'
 import { FaComment } from 'react-icons/fa'
 import axios from 'axios';
 import { Link, useParams } from 'react-router-dom'
@@ -17,6 +17,8 @@ import Loader from '../Loader';
 
 
 const PostCard = () => {
+
+    const [color, setColor] = useState(false);
 
 
     const [IsLoading, setIsLoading] = useState(false);
@@ -53,7 +55,7 @@ const PostCard = () => {
 
     const { userInfo } = useSelector(state => state.login)
 
-    console.log(userInfo, 44)
+    // console.log(userInfo, 44)
 
 
 
@@ -112,10 +114,15 @@ const PostCard = () => {
             // body: JSON.stringify({
             //     postId: id
             // })
-        }).then(res=>console.log(res))
-        .then((result) => {
-            console.log(result)
+        }).then(res => {
+            console.log(res)
+            getPost();
+                setColor(!color);
         })
+
+            .then((result) => {
+                console.log(result)
+            })
     }
 
     // const unlikePost = (id) => {
@@ -132,6 +139,8 @@ const PostCard = () => {
     //         console.log(result)
     //     })
     // }
+
+
 
 
 
@@ -172,8 +181,10 @@ const PostCard = () => {
 
                                 <div className='flex flex-row justify-between'>
                                     <div className='flex flex-row gap-2 items-center'>
-                                         <FcLikePlaceholder onClick={() => {likePost(post._id)}} size={30} className='cursor-pointer' />
-                                          {/* <FcLike onClick={() => {unlikePost(post._id)}} size={30} className='cursor-pointer' /> */}
+                                        {/* <FcLike onClick={() => {likePost(post._id)}} size={30} className={`cursor-pointer ${color ? 'text-white': ''}`} /> */}
+                                        <button onClick={() => { likePost(post._id) }}>
+                                            {post?.likes?.length && color ? <FcLike size={30} /> : <FcLikePlaceholder size={30} />}
+                                        </button>
                                         <span className='font-semibold'>{post?.likes?.length} Likes</span>
 
 

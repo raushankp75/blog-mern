@@ -147,7 +147,7 @@ const updatePost = async (req, res, next) => {
 
         const currentPost = await Post.findById(req.params.id);
 
-      
+
 
         // MODIFY POST IMAGE CONDITIONALLY
         try {
@@ -158,15 +158,15 @@ const updatePost = async (req, res, next) => {
                 crop: 'scale'
             })
 
-              // BUILD THE OBJECT DATA
-        const data = {
-            title: title || currentPost.title,
-            content: content || currentPost.content,
-            image: {
-                public_id: result.public_id,
-                url: result.secure_url
-            }  || currentPost.image
-        }
+            // BUILD THE OBJECT DATA
+            const data = {
+                title: title || currentPost.title,
+                content: content || currentPost.content,
+                image: {
+                    public_id: result.public_id,
+                    url: result.secure_url
+                } || currentPost.image
+            }
 
             const postUpdate = await Post.findByIdAndUpdate(req.params.id, data, { new: true })
 
@@ -174,7 +174,7 @@ const updatePost = async (req, res, next) => {
                 success: true,
                 postUpdate
             })
-    
+
             // const post = await Post.create({
             //     title,
             //     content,
@@ -188,15 +188,15 @@ const updatePost = async (req, res, next) => {
             //     success: true,
             //     post
             // })
-    
+
         } catch (error) {
             console.log(error);
             next(error);
         }
 
-      
 
-       
+
+
     } catch (error) {
         console.log(error);
         next(error);
@@ -215,9 +215,11 @@ const addComment = async (req, res, next) => {
         },
             { new: true }
         )
+
+        console.log(post, 219)
         res.status(200).json({
             success: true,
-            post
+            comment: post.comments[post.comments.length-1]
         })
 
     } catch (error) {
@@ -250,7 +252,7 @@ const addComment = async (req, res, next) => {
 // }
 
 //add like
-const addLike = async(req, res) => {
+const addLike = async (req, res) => {
 
     console.log("scfds")
 
@@ -258,41 +260,41 @@ const addLike = async(req, res) => {
 
     console.log(postid, "scfds")
 
-const PostData = await Post.findById(postid)
+    const PostData = await Post.findById(postid)
 
-console.log(PostData, 246)
+    console.log(PostData, 246)
 
-console.log(PostData.likes)
+    console.log(PostData.likes)
 
-console.log(req.user._id.toString())
+    console.log(req.user._id.toString())
 
-console.log(PostData.likes.includes(req.user._id.toString()))
+    console.log(PostData.likes.includes(req.user._id.toString()))
 
-if(PostData.likes.includes(req.user._id.toString())){
-    Post.findByIdAndUpdate(postid, {
-        $pull: { likes: req.user._id }
-    }, {
-        new: true
-    }).exec((err, result) => {
-        if (err) {
-            return res.status(422).json({ error: err })
-        } else {
-            res.json(result)
-        }
-    })
-} else {
-    Post.findByIdAndUpdate(postid, {
-        $push: { likes: req.user._id }
-    }, {
-        new: true
-    }).exec((err, result) => {
-        if (err) {
-            return res.status(422).json({ error: err })
-        } else {
-            res.json(result)
-        }
-    })
-}
+    if (PostData.likes.includes(req.user._id.toString())) {
+        Post.findByIdAndUpdate(postid, {
+            $pull: { likes: req.user._id, email: req.user.email }
+        }, {
+            new: true
+        }).exec((err, result) => {
+            if (err) {
+                return res.status(422).json({ error: err })
+            } else {
+                res.json(result)
+            }
+        })
+    } else {
+        Post.findByIdAndUpdate(postid, {
+            $push: { likes: req.user._id, likes: req.user._id, email: req.user.email }
+        }, {
+            new: true
+        }).exec((err, result) => {
+            if (err) {
+                return res.status(422).json({ error: err })
+            } else {
+                res.json(result)
+            }
+        })
+    }
 }
 
 //Remove like

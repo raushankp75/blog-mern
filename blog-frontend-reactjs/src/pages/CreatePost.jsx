@@ -35,7 +35,7 @@ const CreatePost = () => {
 
   const navigate = useNavigate();
 
-  const [pic, sePic] = useState("")
+  const [pic, setPic] = useState("")
 
   // console.log(pic)
 
@@ -57,7 +57,7 @@ const CreatePost = () => {
       });
       if (data.success === true) {
         toast.success('post created');
-        if(userInfo.role === 'admin'){
+        if (userInfo.role === 'admin') {
           navigate('/admin/dashboard')
         }
         navigate('/postlist')
@@ -67,6 +67,49 @@ const CreatePost = () => {
       toast.error(error);
     }
   }
+
+
+
+
+
+  // const [selectedImages, setSelectedImages] = useState();
+  const onSelectFile = (e) => {
+    // const selectedFiles = e.target.files[0];
+    // console.log(selectedFiles);
+    // const selectedFilesArray = Array.from(selectedFiles);
+
+    // const singleImage = URL.createObjectURL(selectedFiles);
+
+    // const imageArray = selectedFilesArray.map((file) => {
+    //   return URL.createObjectURL(file);
+    // });
+
+    // setPic(singleImage);
+    // console.log(Array.isArray(selectedFiles));
+
+
+    // setPic(URL.createObjectURL(e.target.files[0]))
+  }
+
+
+//   const [previews, setPreviews] = useState();
+// useEffect(() => {
+//   if(!files) return;
+
+//   let tmp = [];
+//   tmp.push(URL.createObjectURL(files[0]));
+
+//   const objectUrls = tmp;
+//   setPreviews(objectUrls);
+
+//   // free memory
+//   for(let i=0; i<objectUrls.length; i++){
+//     return () => {
+//       URL.removeObjectURL(objectUrls[0])
+//     }
+//   }
+// }, [files[0]])
+
 
 
 
@@ -125,18 +168,60 @@ const CreatePost = () => {
                 {/* <small className='w-full pb-4'><ErrorMessage name='content' /></small> */}
 
 
-                <div className="py-4">
+                {/* <div className="py-4">
                   <input
                     name='image'
                     id='image'
                     type="file"
                     onChange={(event) => {
-                      sePic(event.target.files[0])
+                      setPic(event.target.files[0])
                     }}
                   />
-                </div>
-                
-                <PreviewImage />
+                </div> */}
+
+                {/* <PreviewImage /> */}
+
+
+
+
+                {/* <div className='py-[2rem]'>
+                  <label className='my-0 mx-auto flex flex-col justify-center bottom-1 border-dotted border-black rounded-xl w-[10rem] h-[10rem] cursor-pointer text-lg'>
+                    Add Images
+                    <hr />
+                    <input
+                      type="file"
+                      name='image'
+                      id='image'
+                      onChange={onSelectFile}
+                      accept='image/png, image/jpeg, image/jpg, image/webp'
+                      className='hidden'
+                    />
+                  </label>
+
+                  <div className='w-48'>
+
+                    <div className='w-48'>
+                      <img src={pic} alt="" />
+
+                    </div>
+
+                  </div>
+                </div>  */}
+
+
+
+
+                <input
+                  type="file"
+                  name="image"
+                  id="image"
+                  onChange={(e) => {
+                    setPic(event.target.files[0])
+                    // if(e.target.files) {
+                    //   setPic(e.target.files)
+                    // }
+                  }}
+                />
 
                 <button type="submit" className="w-fit bg-blue-500 text-white px-5 py-2 rounded-lg hover:bg-gray-200 hover:text-black hover:border hover:border-gray-300">Create Post</button>
               </div>

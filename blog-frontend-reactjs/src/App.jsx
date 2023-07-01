@@ -21,12 +21,13 @@ import store from './redux/store'
 
 import AdminRoute from './components/AdminRoute';
 import Signup from './pages/Signup';
-import Profile from './pages/profile';
+// import Profile from './pages/profile';
 import Post from './pages/Post';
 import AdminDashboard from './admin/AdminDashboard';
 import AllPostList from './admin/AllPostList';
 import AllUserList from './admin/AllUserList';
 import SingleUser from './admin/SingleUser';
+import Profile from './pages/Profile';
 
 
 
