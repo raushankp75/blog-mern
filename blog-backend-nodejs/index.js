@@ -32,7 +32,7 @@ const commonRoute = require('./routes/commonRoute');
 // MIDDLEWARE
 app.use(morgan('dev'));
 app.use(cors( {
-    origin: 'http://localhost:5173',
+    origin: 'https://blog-mern-cled.onrender.com',
     credentials: true
 }));
 // app.use(bodyParser.json({ extended: true }))
