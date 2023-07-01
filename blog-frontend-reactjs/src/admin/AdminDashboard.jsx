@@ -17,7 +17,7 @@ const AdminDashboard = () => {
         // setTimeout(() => {
         setIsLoading(true);
         try {
-            const response = await axios.get('http://localhost:8000/api/data/count', {
+            const response = await axios.get('https://blog-mern-cled.onrender.com/api/data/count', {
                 headers: {
                     'Content-Type': 'application/json'
                 },

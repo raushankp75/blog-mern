@@ -25,7 +25,7 @@ const AllUserList = () => {
     // view post list
     const getPost = async () => {
         try {
-            const response = await axios.get('http://localhost:8000/api/allusers', {
+            const response = await axios.get('https://blog-mern-cled.onrender.com/api/allusers', {
                 headers: {
                     'Content-Type': 'application/json'
                 },

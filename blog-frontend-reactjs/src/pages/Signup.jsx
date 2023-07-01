@@ -47,7 +47,7 @@ const Signup = () => {
     console.log(values)
 
     try {
-      const { data } = await axios.post('http://localhost:8000/api/signup', values, {
+      const { data } = await axios.post('https://blog-mern-cled.onrender.com/api/signup', values, {
         headers: {
           'Content-Type': 'multipart/form-data'
         },
