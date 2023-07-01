@@ -10,7 +10,7 @@ import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 import { modules } from '../components/moduleToolbar';
 import axios from 'axios';
-import GoBack from '../components/goBack';
+//import GoBack from '../components/goBack';
 
 
 
@@ -139,7 +139,7 @@ const EditPost = () => {
                         
                         <Form>
                             {/* <h1>{setFieldValue}</h1> */}
-                            <GoBack />
+                            {/* <GoBack /> */}
                             <div className="flex flex-col justify-center md:max-w-3xl mx-auto">
                                 <span className="mb-3 text-4xl font-bold">Update</span>
                                 <div className="py-4">

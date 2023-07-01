@@ -1,5 +1,5 @@
 import React from 'react'
-// import GoBack from '../components/goBack'
+// //import GoBack from '../components/goBack'
 
 const About = () => {
   // https://drive.google.com/uc?export=view&id=1H3UdTp3tuZyN0MyT12qZx8w_wGco6iDF

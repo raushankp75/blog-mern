@@ -10,7 +10,7 @@ import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 import { modules } from '../components/moduleToolbar';
 import axios from 'axios';
-// import GoBack from '../components/goBack';
+// //import GoBack from '../components/goBack';
 import PreviewImage from '../components/PreviewImage';
 
 

@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import PostCard from '../components/post/PostCard'
 import Banner from '../components/Banner'
-// import GoBack from '../components/goBack'
-// import GoBack from '../components/goBack'
+// //import GoBack from '../components/goBack'
+// //import GoBack from '../components/goBack'
 
 
 const PostList = () => {

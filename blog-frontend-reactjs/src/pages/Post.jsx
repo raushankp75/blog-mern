@@ -7,7 +7,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { toast } from 'react-toastify';
 
 import moment from 'moment'
-// import GoBack from '../components/goBack';
+// //import GoBack from '../components/goBack';
 
 
 const Post = () => {

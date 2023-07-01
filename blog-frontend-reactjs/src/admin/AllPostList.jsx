@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import DataTable from 'react-data-table-component';
 import axios from 'axios';
-import GoBack from '../components/goBack';
+// //import GoBack from '../components/goBack';
 
 import { Link } from 'react-router-dom';
 
@@ -186,7 +186,7 @@ const AllPostList = () => {
     return (
 
         <div>
-            <GoBack />
+            {/* <GoBack /> */}
             <DataTable
                 columns={columns}
                 data={filteredName}
