@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import PostCard from '../components/post/PostCard'
 import Banner from '../components/Banner'
-import GoBack from '../components/goBack'
+// import GoBack from '../components/goBack'
+// import GoBack from '../components/goBack'
 
 
 const PostList = () => {
@@ -15,7 +16,7 @@ const PostList = () => {
 
   return (
     <>
-      <GoBack />
+      {/* <GoBack /> */}
       <div className='my-5'>
       {/* <Banner /> */}
       <div className='grid md:grid-cols-3 grid-cols-1 gap-8'>
