@@ -1,10 +1,10 @@
 import React from 'react'
 
 const SidebarData = [
-        // {
-        //     name: "Dashboard",
-        //     link: "/admin/dashboard"
-        // },
+        {
+            name: "Dashboard",
+            link: "/admin/dashboard"
+        },
         {
             name: "All Post",
             link: "allpostlist"
@@ -17,10 +17,10 @@ const SidebarData = [
             name: "All User",
             link: "alluserlist"
         },
-        // {
-        //     name: "profile",
-        //     link: "/profile"
-        // },
+        {
+            name: "profile",
+            link: "/profile"
+        },
     ]
 
 export default SidebarData

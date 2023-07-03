@@ -9,16 +9,16 @@ if (role) {
     NavbarData = [
         {
             name: "All Post",
-            link: "/"
+            link: "/postlist"
         },
-        // {
-        //     name: "About",
-        //     link: "/about"
-        // },
-        // {
-        //     name: "Contact",
-        //     link: "/contact"
-        // }
+        {
+            name: "About",
+            link: "/about"
+        },
+        {
+            name: "Contact",
+            link: "/contact"
+        }
     ]
 }
 export default NavbarData

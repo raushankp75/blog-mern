@@ -30,6 +30,8 @@ const validationSchema = yup.object({
 
 const Signup = () => {
 
+  const gifLoading = 'https://i.gifer.com/ZKZx.gif'
+
   const [profilePic, setProfilePic] = useState("")
 
   // to navigate page
@@ -54,7 +56,7 @@ const Signup = () => {
         withCredentials: true,    // IMPORTANT!!!
       });
       toast.success('Signup Successfully');
-      navigate('/login')
+      navigate('/')
     } catch (error) {
       console.log(error);
       toast.error(error);
@@ -137,8 +139,7 @@ const Signup = () => {
                         }}
                       />
                     </div>
-                    <button disabled={loading} type="submit" className="w-full bg-blue-500 text-white p-2 rounded-lg mb-6 hover:bg-white hover:text-black hover:border hover:border-gray-300">{loading ? 'Loading...' : 'Signup'}</button>
-                    {/* <button type="submit" className="w-full bg-blue-500 text-white p-2 rounded-lg mb-6 hover:bg-white hover:text-black hover:border hover:border-gray-300">Login</button> */}
+                    <button type="submit" className="w-full bg-blue-500 text-white p-2 rounded-lg mb-6 hover:bg-white hover:text-black hover:border hover:border-gray-300">Signup</button>
 
                     <div className="flex gap-2 text-gray-400">
                       <p>Already Signup?</p>

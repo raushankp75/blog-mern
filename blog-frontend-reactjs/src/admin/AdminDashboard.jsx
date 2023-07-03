@@ -56,7 +56,7 @@ const AdminDashboard = () => {
                                     <h1 className='text-gray-100 text-2xl font-bold'>{count.user}</h1>
                                 </div>
 
-                                <div className='bg-blue-500 h-32 grid place-items-center content-center'>
+                                {/* <div className='bg-blue-500 h-32 grid place-items-center content-center'>
                                     <SlLike size={30} color='white' />
                                     <p className='text-gray-100 text-xl'>Total Likes</p>
                                     <h1 className='text-gray-100 text-2xl font-bold'>{count.like.length}</h1>
@@ -65,7 +65,7 @@ const AdminDashboard = () => {
                                     <TfiCommentAlt size={30} color='white' />
                                     <p className='text-gray-100 text-xl'>Total Comments</p>
                                     <h1 className='text-gray-100 text-2xl font-bold'>5</h1>
-                                </div>
+                                </div> */}
                             </div>
                         )
                     })
