@@ -29,7 +29,7 @@ const Profile = () => {
 
     const getProfile = async () => {
         try {
-            const response = await axios.get(`https://blog-mern-cled.onrender.com/api/profile`, {
+            const response = await axios.get(`http://localhost:8000/api/profile`, {
                 headers: {
                     'Content-Type': 'multipart/form-data'
                 },

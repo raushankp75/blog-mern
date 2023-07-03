@@ -11,7 +11,7 @@ import 'react-quill/dist/quill.snow.css';
 import { modules } from '../components/moduleToolbar';
 import axios from 'axios';
 // //import GoBack from '../components/goBack';
-import PreviewImage from '../components/PreviewImage';
+// import PreviewImage from '../components/PreviewImage';
 
 
 
@@ -49,7 +49,7 @@ const CreatePost = () => {
     console.log(values)
 
     try {
-      const { data } = await axios.post('https://blog-mern-cled.onrender.com/api/post/create', values, {
+      const { data } = await axios.post('http://localhost:8000/api/post/create', values, {
         headers: {
           'Content-Type': 'multipart/form-data'
         },
@@ -216,7 +216,7 @@ const CreatePost = () => {
                   name="image"
                   id="image"
                   onChange={(e) => {
-                    setPic(event.target.files[0])
+                    setPic(e.target.files[0])
                     // if(e.target.files) {
                     //   setPic(e.target.files)
                     // }

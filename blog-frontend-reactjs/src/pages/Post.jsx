@@ -27,7 +27,7 @@ const Post = () => {
     // setTimeout(() => {
     setIsLoading(true);
     try {
-      const response = await axios.get(`https://blog-mern-cled.onrender.com/api/post/${id}`, {
+      const response = await axios.get(`http://localhost:8000/api/post/${id}`, {
         headers: {
           'Content-Type': 'application/json'
         },
@@ -77,7 +77,7 @@ const Post = () => {
 
 
     try {
-      const { data } = await axios.post(`https://blog-mern-cled.onrender.com/api/comment/post/${id}`, addComment, {
+      const { data } = await axios.post(`http://localhost:8000/api/comment/post/${id}`, addComment, {
         headers: {
           "Content-Type": "application/json"
         },

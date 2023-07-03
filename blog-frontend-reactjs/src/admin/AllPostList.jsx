@@ -25,7 +25,7 @@ const AllPostList = () => {
     // view post list
     const getPost = async () => {
         try {
-            const response = await axios.get('https://blog-mern-cled.onrender.com/api/posts/view', {
+            const response = await axios.get('http://localhost:8000/api/posts/view', {
                 headers: {
                     'Content-Type': 'application/json'
                 },
@@ -65,7 +65,7 @@ const AllPostList = () => {
         // console.log(id)
         if (window.confirm("Are you sure you want to delete this post?")) {
             try {
-                const { data } = await axios.delete(`https://blog-mern-cled.onrender.com/api/delete/post/${id}`, {
+                const { data } = await axios.delete(`http://localhost:8000/api/delete/post/${id}`, {
                     headers: {
                         'Content-Type': 'application/json'
                     },

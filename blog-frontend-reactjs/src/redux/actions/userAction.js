@@ -9,7 +9,7 @@ export const userSignupAction = (user) => async (dispatch) => {
     dispatch({ type: USER_SIGNUP_REQUEST });
 
     try {
-        const { data } = await axios.post('https://blog-mern-cled.onrender.com/api/signup', user, {
+        const { data } = await axios.post('http://localhost:8000/api/signup', user, {
             headers: {
                 "Content-Type": "application/json"
             },
@@ -60,7 +60,7 @@ export const userLoginAction = (user) => async (dispatch) => {
     dispatch({ type: USER_LOGIN_REQUEST });
 console.log(" hih")
     try {
-        const { data } = await axios.post('https://blog-mern-cled.onrender.com/api/login', user, {
+        const { data } = await axios.post('http://localhost:8000/api/login', user, {
             headers: {
                 "Content-Type": "application/json"
             },
@@ -90,7 +90,7 @@ export const userProfileAction = (user) => async (dispatch) => {
     dispatch({ type: USER_LOAD_REQUEST });
 
     try {
-        const { data } = await axios.get('https://blog-mern-cled.onrender.com/api/me', {
+        const { data } = await axios.get('http://localhost:8000/api/me', {
             headers: {
                 "Content-Type": "application/json"
             },
@@ -118,7 +118,7 @@ export const userLogoutAction = () => async (dispatch) => {
 
     try {
         localStorage.removeItem('userInfo');
-        const { data } = await axios.get('https://blog-mern-cled.onrender.com/api/logout', {
+        const { data } = await axios.get('http://localhost:8000/api/logout', {
             headers: {
                 "Content-Type": "application/json"
             },

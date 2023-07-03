@@ -32,7 +32,8 @@ const commonRoute = require('./routes/commonRoute');
 // MIDDLEWARE
 app.use(morgan('dev'));
 app.use(cors( {
-    origin: 'https://blog-mern-md5n.vercel.app',
+    // origin: 'https://blog-mern-9ivr.vercel.app/',
+    origin: 'http://localhost:5173',
     credentials: true
 }));
 // app.use(bodyParser.json({ extended: true }))

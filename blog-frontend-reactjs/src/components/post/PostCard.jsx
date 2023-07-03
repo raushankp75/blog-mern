@@ -32,7 +32,7 @@ const PostCard = () => {
         // setTimeout(() => {
         setIsLoading(true);
         try {
-            const response = await axios.get('https://blog-mern-cled.onrender.com/api/posts/view', {
+            const response = await axios.get('http://localhost:8000/api/posts/view', {
                 headers: {
                     'Content-Type': 'application/json'
                 },
@@ -63,7 +63,7 @@ const PostCard = () => {
     //add like
     // const addLike = async () => {
     //     try {
-    //         const { data } = await axios.put(`https://blog-mern-cled.onrender.com/api/addlike/post/${id}`);
+    //         const { data } = await axios.put(`http://localhost:8000/api/addlike/post/${id}`);
     //         console.log("likes", data.post);
     //         if (data.success == true) {
     //             getPost();
@@ -81,7 +81,7 @@ const PostCard = () => {
     //remove like
     // const removeLike = async () => {
     //     try {
-    //         const { data } = await axios.put(`https://blog-mern-cled.onrender.com/api/removelike/post/${id}}`, {
+    //         const { data } = await axios.put(`http://localhost:8000/api/removelike/post/${id}}`, {
     //             headers: {
     //                 'Content-Type': 'application/json'
     //             },
@@ -106,7 +106,7 @@ const PostCard = () => {
     const likePost = (id) => {
 
         console.log(id, 20)
-        axios.post(`https://blog-mern-cled.onrender.com/api/addlike/post/${id}`, {}, {
+        axios.post(`http://localhost:8000/api/addlike/post/${id}`, {}, {
             headers: {
                 'Content-Type': 'application/json'
             },
@@ -126,7 +126,7 @@ const PostCard = () => {
     }
 
     // const unlikePost = (id) => {
-    //     axios.put(`https://blog-mern-cled.onrender.com/api/removelike/post/${id}`, {
+    //     axios.put(`http://localhost:8000/api/removelike/post/${id}`, {
     //         headers: {
     //             'Content-Type': 'application/json'
     //         },

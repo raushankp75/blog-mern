@@ -53,7 +53,7 @@ const EditPost = () => {
     // view single post by id
     const getPost = async () => {
         try {
-            const response = await axios.get(`https://blog-mern-cled.onrender.com/api/post/${id}`, {
+            const response = await axios.get(`http://localhost:8000/api/post/${id}`, {
                 headers: {
                     'Content-Type': 'application/json'
                 },
@@ -90,7 +90,7 @@ const EditPost = () => {
     // update single post by id
     const updatePost = async (values) => {
         try {
-            const { data } = await axios.put(`https://blog-mern-cled.onrender.com/api/update/post/${id}`, values, {
+            const { data } = await axios.put(`http://localhost:8000/api/update/post/${id}`, values, {
                 headers: {
                     'Content-Type': 'application/json'
                 },

@@ -31,7 +31,7 @@ const EditPost = () => {
 
 
     useEffect(() => {
-        axios.get(`https://blog-mern-cled.onrender.com/api/post/${id}`, {
+        axios.get(`http://localhost:8000/api/post/${id}`, {
             headers: {
                 "content-Type": "application/json"
             },
@@ -68,7 +68,7 @@ const EditPost = () => {
 
     const handleSubmit = async (vals) => {
         // e.preventDefault();
-        await axios.put(`https://blog-mern-cled.onrender.com/api/update/post/${id}`, vals, {
+        await axios.put(`http://localhost:8000/api/update/post/${id}`, vals, {
             headers: {
                 'content-Type': 'multipart/form-data'
             },
